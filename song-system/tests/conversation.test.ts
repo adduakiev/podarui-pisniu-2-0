@@ -147,3 +147,43 @@ test('recipient correction keeps the original and corrected source messages', as
   assert.equal(listOrders().find(order => order.id === id)!.recipient, 'бабусі');
   assert.equal(corrected.canConfirm, false);
 });
+
+
+test('a long opening preserves beloved recipient and name without asking again after reload', async () => {
+ const {createOrder,db,listOrders}=await import('../lib/db');
+ const {conversation}=await import('../lib/conversation');
+ for(const recipient of ['коханому','Коханому','для коханого']){
+  const opening=`Хочу пісню ${recipient} Олександру. Ми познайомилися у Львові, маємо доньку. Хочу подякувати за нашу сім’ю. На день народження.`;
+  const id=createOrder({name:'Гість',contact:'Чат сайту',recipient:'Не вказано',opening,requestId:crypto.randomUUID()});
+  let c=conversation(id);
+  assert.match(c.messages.at(-1)!.text,/Від чийого імені/);
+  assert.doesNotMatch(c.messages.at(-1)!.text,/Для кого|Як звати/);
+  assert.equal(c.canConfirm,false);assert.equal(c.paymentLink,'');
+  c=conversation(id,'Від мене');
+  c=conversation(id);
+  const state=JSON.parse((db().prepare('SELECT body FROM conversations WHERE orderId=?').get(id) as {body:string}).body);
+  const order=listOrders().find(o=>o.id===id)!;
+  assert.equal(order.opening,opening);
+  assert.equal(order.recipient,recipient.replace('для ',''));
+  assert.equal(state.answers.sender,'Олександру');assert.equal(state.answers.story,opening);
+  for(const key of ['recipient','sender'])assert.equal(state.messages[state.facts[key].source_message_id].text,opening);
+  assert.equal(c.messages.filter(m=>m.role==='user'&&m.text===opening).length,1);
+  assert.equal(c.canConfirm,true);assert.equal(c.confirmed,false);assert.equal(c.paymentLink,'');
+  assert.doesNotMatch(c.messages.at(-1)!.text,/Для кого|Як звати|передоплат|2000 грн/);
+ }
+});
+
+test('from a beloved identifies the narrator rather than the recipient', async () => {
+ const {createOrder,db,listOrders}=await import('../lib/db');
+ const {conversation}=await import('../lib/conversation');
+ for(const opening of ['Хочу пісню від коханого Олександра','Хочу пісню від коханого Олександра для мами']){
+  const id=createOrder({name:'Гість',contact:'Чат сайту',recipient:'Не вказано',opening,requestId:crypto.randomUUID()});
+  const c=conversation(id);
+  const state=JSON.parse((db().prepare('SELECT body FROM conversations WHERE orderId=?').get(id) as {body:string}).body);
+  assert.equal(listOrders().find(o=>o.id===id)!.recipient,opening.endsWith('для мами')?'мами':'Не вказано');
+  assert.equal(state.answers.sender,undefined);
+  assert.equal(state.answers.narrator,'від коханого');
+  if(!opening.endsWith('для мами'))assert.match(c.messages.at(-1)!.text,/Для кого/);
+  assert.equal(c.canConfirm,false);assert.equal(c.paymentLink,'');
+ }
+});

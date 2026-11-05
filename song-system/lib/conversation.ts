@@ -142,11 +142,17 @@ export function conversation(id:string,message?:string,confirm=false){return db(
     const tone=toneOf(message);
     const changedTone=tone!=='neutral'&&tone!==state.tone&&(tone==='memory'||state.tone!=='memory');
     if(changedTone)state.tone=tone;
-    const relation=message.match(/(?:^|\s)(дружині|дружини|чоловікові|чоловіку|мамі|мами|матусі|матуся|тат[уі]|тата|батькові|бабусі|дідусеві|подрузі|другові|доньці|синові|колезі|команді)(?=$|[\s,!.])/iu)?.[1];
-    const recipientName=message.match(/(?:дружині|чоловікові|мамі|тат[уі]|подрузі)\s+([А-ЯІЇЄҐ][а-яіїєґ’'-]+)(?=$|[\s,!.])/u)?.[1];
+    // A genitive beloved is a recipient only after «для», never after «від».
+    const recipientMatch=Array.from(message.matchAll(/(?:^|\s)(дружині|дружини|чоловікові|чоловіку|мамі|мами|матусі|матуся|тат[уі]|тата|батькові|бабусі|дідусеві|подрузі|другові|доньці|синові|колезі|команді|коханому|коханій|коханого|коханої)(?=$|[\s,!.])/giu)).find(match=>{
+     const prefix=message.slice(0,match.index).trimEnd();
+     if(/(?:^|\s)від$/iu.test(prefix))return false;
+     return !/^кохан(?:ого|ої)$/iu.test(match[1])||/(?:^|\s)для$/iu.test(prefix);
+    });
+    const relation=recipientMatch?.[1];
+    const recipientName=recipientMatch?message.slice(recipientMatch.index!+recipientMatch[0].length).match(/^\s+([А-ЯІЇЄҐ][а-яіїєґ’'ʼ-]+)(?=$|[\s,!.])/u)?.[1]:undefined;
     if(relation&&order.recipient==='Не вказано'){order.recipient=relation;remember('recipient',relation);markChanged();}
     if(recipientName&&!state.answers.sender)details.sender=recipientName;
-    const narrator=message.match(/(?:від мого імені|від мене|від (?:дружини|чоловіка|дітей|доньки|сина|родини))(?=$|[\s,.!])/iu)?.[0];
+    const narrator=message.match(/(?:від мого імені|від мене|від (?:дружини|чоловіка|дітей|доньки|сина|родини|коханого|коханої))(?=$|[\s,.!])/iu)?.[0];
     if(narrator){state.answers.narrator=narrator;remember('narrator',narrator);markChanged();}
     if((tone==='memory'||tone==='distance')&&!details.occasion&&!state.answers.occasion){details.occasion=tone==='memory'?'Пісня пам’яті':'Пісня підтримки';remember('occasion',details.occasion,'inferred');}
     let captured=false;
