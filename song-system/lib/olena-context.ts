@@ -2,7 +2,7 @@
 // Only explicit details are extracted; the original message stays in history.
 export type Tone='memory'|'distance'|'joy'|'neutral';
 export function toneOf(text:string):Tone{
- if(/(?:на|у) пам[’'ʼ]ять|пісн\S* пам[’'ʼ]яті|помер|покійн|загинув|загинула|втратил/iu.test(text))return 'memory';
+ if(/(?:на|у) пам[’'ʼ]ять|пісн\S* пам[’'ʼ]яті|(?:якого|якої) не стало|помер|покійн|загинув|загинула|втратил/iu.test(text))return 'memory';
  if(/захища[єю].*україн|військов|служить|службі|на відстані|розлук/iu.test(text))return 'distance';
  return /річниц|весіл|народжен|ювіл/iu.test(text)?'joy':'neutral';
 }
@@ -20,7 +20,20 @@ export function reaction(tone:Tone){
  switch(tone){
   case 'memory':return 'Мені шкода Вашої втрати. Дякую, що довірили нам цю історію.';
   case 'distance':return 'Дякую, що поділилися. Допоможемо передати в пісні те, що важливо сказати на відстані.';
-  case 'joy':return 'Яка гарна нагода подарувати пісню про Вас двох!';
+  case 'joy':return 'Яка гарна нагода подарувати пісню зі своєю історією!';
   default:return '';
  }
+}
+
+export function storySignals(text:string){
+ const anchors=[
+  /познайомил|перша зустріч|вперше зустріли/iu,
+  /маємо (?:сина|доньку|дітей)|народил[аои].*(?:син|доньк|дитин)|(?:наш|наша) (?:син|донька)/iu,
+  /подорож|поїхал|відвідал|прогулянк/iu,
+  /щоранку|щовечора|щонеділі|завжди (?:готу|пече|чека|зустріча)/iu,
+  /(?:разом|одружені)\s+\d+\s+(?:рок|рік)|\d+\s+років\s+разом/iu,
+  /переїхал|жили в|пережил|підтримав|підтримала|навчив|навчила/iu,
+  /(?:каже|казав|казала|називає)\s+[«"„]/iu
+ ].filter(pattern=>pattern.test(text)).length;
+ return {anchors,emotion:/люблю|кохаю|закохал|вдячн|подякува|підтримати|пишаю|сумую|бракує|пробач|ціную|бережу/iu.test(text)};
 }
