@@ -1,0 +1,12 @@
+const adminPassword=process.env.ADMIN_PASSWORD;
+if(!adminPassword)throw new Error('Set ADMIN_PASSWORD for the local test environment');
+import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
+const base='http://127.0.0.1:3000';const headers={Origin:base,'Content-Type':'application/json'};
+assert.equal((await fetch(base+'/api/orders')).status,401);
+assert.equal((await fetch(base+'/api/session',{method:'POST',headers:{...headers,Origin:'https://example.com'},body:JSON.stringify({password:adminPassword})})).status,403);
+const login=await fetch(base+'/api/session',{method:'POST',headers,body:JSON.stringify({password:adminPassword})});assert.equal(login.status,200);const cookie=login.headers.get('set-cookie').split(';')[0];const auth={...headers,Cookie:cookie};
+const form=new FormData();form.set('kind','review');form.set('title','Тестовий файл (не відгук)');form.set('file',new Blob([readFileSync('public/brand/hero.jpg')],{type:'image/jpeg'}),'test.jpg');const upload=await fetch(base+'/api/media',{method:'POST',headers:{Origin:base,Cookie:cookie},body:form});assert.equal(upload.status,200,await upload.text());const media=await(await fetch(base+'/api/media',{headers:auth})).json();const m=media.find(x=>x.title==='Тестовий файл (не відгук)');assert(m);assert.equal((await fetch(base+'/api/media/'+m.id)).status,404);assert.equal((await fetch(base+'/api/media/'+m.id,{headers:{Cookie:cookie}})).status,200);
+assert.equal((await fetch(base+'/api/media',{method:'PATCH',headers:auth,body:JSON.stringify({id:m.id,published:true,consent:false,position:0})})).status,400);
+assert.equal((await fetch(base+'/api/media',{method:'PATCH',headers:auth,body:JSON.stringify({id:m.id,published:true,consent:true,position:0})})).status,200);assert.equal((await fetch(base+'/api/media/'+m.id)).status,200);
+assert.equal((await fetch(base+'/api/media',{method:'PATCH',headers:auth,body:JSON.stringify({id:m.id,published:false,consent:true,position:0})})).status,200);assert.equal((await fetch(base+'/api/media/'+m.id)).status,404);
+console.log('PASS: authentication, cross-origin rejection, file upload, draft privacy, consent requirement, publication and hiding.');
