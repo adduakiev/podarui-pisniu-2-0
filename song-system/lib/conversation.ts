@@ -83,7 +83,7 @@ function save(id:string,state:State,order:Order,changed:boolean,feedbackOnly=fal
  const prefix=order.notes.split('\n\n[Чат сайту]')[0];
  const brief=questions.filter(q=>state.answers[q.key]).map(q=>q.label+': '+state.answers[q.key]).join('\n');
  const notes=prefix+'\n\n[Чат сайту]\n'+(brief?'Творчий бриф:\n'+brief+'\n\n':'')+state.messages.map(m=>(m.role==='user'?'Клієнт: ':'Помічник: ')+m.text+(m.feedback?'\n[Оцінка тесту] '+(m.feedback.reason||'')+'\nБажана відповідь: '+m.feedback.replacement:'')).join('\n');
- db().prepare('UPDATE orders SET body=? WHERE id=?').run(JSON.stringify(feedbackOnly?{...order,notes,revision:order.revision+1}:{...order,communicationMode:state.mode,handoffReason:state.handoffReason||'',revision:order.revision+1,status:order.status==='Нове звернення'?'Збір інформації':order.status,nextAction:state.mode==='producer'?'Продюсеру: '+state.handoffReason:state.confirmed?'Перевірити погоджений бриф та оплату':'Переглянути діалог і доповнити бриф',notes}),id);
+ db().prepare('UPDATE orders SET body=? WHERE id=?').run(JSON.stringify(feedbackOnly?{...order,notes,revision:order.revision+1}:{...order,communicationMode:state.mode,handoffReason:state.handoffReason||'',revision:order.revision+1,status:order.status==='Нове звернення'?'Збір інформації':order.status,nextAction:state.mode==='producer'?'Продюсеру: '+state.handoffReason:!['Нове звернення','Збір інформації'].includes(order.status)?order.nextAction:state.confirmed?'Перевірити погоджений бриф та оплату':'Переглянути діалог і доповнити бриф',notes}),id);
 }
 export function resumeConversation(id:string){return db().transaction(()=>{const {state,order}=load(id);state.mode='assistant';state.handoffReason=undefined;save(id,state,order,true);return {ok:true}})()}
 export function conversation(id:string,message?:string,confirm=false){return db().transaction(()=>{
@@ -93,6 +93,10 @@ export function conversation(id:string,message?:string,confirm=false){return db(
  const handoff=(reason:string)=>{state.mode='producer';state.handoffReason=reason;state.confirmed=false;say('Передам ваше питання продюсеру разом з історією замовлення 🤍 Подальші деталі він погодить із вами особисто. Можете додати повідомлення тут — вони збережуться для нього.');};
  if(message){
   state.messages.push({role:'user',text:message});
+  order.lastInboundAt=new Date().toISOString();
+  if(/не (?:пишіть|телефонуйте)(?: мені)?|не (?:зв[’'ʼ]язуйтеся|зв[’'ʼ]язуйтесь)|відпишіть мене/iu.test(message)){
+   order.followupOptOut=true;
+  }
   const greeting=/^(?:привіт(?:ик)?|вітаю|добрий день|доброго дня|добрий вечір|доброго вечора|добрий ранок|доброго ранку|👋)(?=$|[\s,.!🤍😊👋])(?:[\s,.!🤍😊👋]*)/iu;
   const greeted=greeting.test(message.trim());
   message=message.trim().replace(greeting,'');
@@ -143,8 +147,9 @@ export function conversation(id:string,message?:string,confirm=false){return db(
     const changedTone=tone!=='neutral'&&tone!==state.tone&&(tone==='memory'||state.tone!=='memory');
     if(changedTone)state.tone=tone;
     // A genitive beloved is a recipient only after «для», never after «від».
-    const recipientMatch=Array.from(message.matchAll(/(?:^|\s)(дружині|дружини|чоловікові|чоловіку|мамі|мами|матусі|матуся|тат[уі]|тата|батькові|бабусі|дідусеві|подрузі|другові|доньці|синові|колезі|команді|коханому|коханій|коханого|коханої)(?=$|[\s,!.])/giu)).find(match=>{
-     const prefix=message.slice(0,match.index).trimEnd();
+    const recipientText=message;
+    const recipientMatch=Array.from(recipientText.matchAll(/(?:^|\s)(дружині|дружини|чоловікові|чоловіку|мамі|мами|матусі|матуся|тат[уі]|тата|батькові|бабусі|дідусеві|подрузі|другові|доньці|синові|колезі|команді|коханому|коханій|коханого|коханої)(?=$|[\s,!.])/giu)).find(match=>{
+     const prefix=recipientText.slice(0,match.index).trimEnd();
      if(/(?:^|\s)від$/iu.test(prefix))return false;
      return !/^кохан(?:ого|ої)$/iu.test(match[1])||/(?:^|\s)для$/iu.test(prefix);
     });
