@@ -1,5 +1,20 @@
 import { DatabaseSync } from 'node:sqlite';
-class LocalDatabase extends DatabaseSync { transaction<T>(fn:()=>T){return ()=>{this.exec('BEGIN IMMEDIATE');try{const result=fn();this.exec('COMMIT');return result}catch(e){this.exec('ROLLBACK');throw e}}} }
+class LocalDatabase extends DatabaseSync {
+ transaction<T>(fn:()=>T){
+  return ()=>{
+   const nested=this.isTransaction;
+   this.exec(nested?'SAVEPOINT local_transaction':'BEGIN IMMEDIATE');
+   try {
+    const result=fn();
+    this.exec(nested?'RELEASE local_transaction':'COMMIT');
+    return result;
+   } catch(error) {
+    this.exec(nested?'ROLLBACK TO local_transaction; RELEASE local_transaction':'ROLLBACK');
+    throw error;
+   }
+  }
+ }
+}
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
