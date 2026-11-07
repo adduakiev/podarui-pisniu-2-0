@@ -1,13 +1,28 @@
-import nextEnv from '@next/env';nextEnv.loadEnvConfig(process.cwd());
-const {telegramCall}=await import('../lib/telegram.ts');const {db}=await import('../lib/db.ts');const {conversation}=await import('../lib/conversation.ts');
-const database=db();database.exec('CREATE TABLE IF NOT EXISTS telegram_links(code TEXT PRIMARY KEY,orderId TEXT NOT NULL,chatId TEXT UNIQUE);CREATE TABLE IF NOT EXISTS telegram_state(key TEXT PRIMARY KEY,value TEXT NOT NULL)');
-const webhook=await telegramCall('getWebhookInfo');if(webhook.url){console.log('BLOCKED: existing webhook; no changes made');process.exit(1)}
+import nextEnv from '@next/env';
+nextEnv.loadEnvConfig(process.cwd());
+const { telegramCall } = await import('../lib/telegram.ts');
+const { db } = await import('../lib/db.ts');
+const { processTelegramUpdate } = await import('../lib/telegram-inbound.ts');
+const database = db();
+database.exec('CREATE TABLE IF NOT EXISTS telegram_state(key TEXT PRIMARY KEY,value TEXT NOT NULL)');
+const webhook = await telegramCall('getWebhookInfo');
+if (webhook.url) {
+  console.log('BLOCKED: existing webhook; no changes made');
+  process.exit(1);
+}
 console.log('Telegram worker ready: @podaruy_pisnyu_bot');
-let offset=Number((database.prepare("SELECT value FROM telegram_state WHERE key='offset'").get() as any)?.value||0);
-if(!offset){const pending=await telegramCall('getUpdates',{offset:-1,timeout:0});offset=pending.length?pending[pending.length-1].update_id+1:0;database.prepare("INSERT OR REPLACE INTO telegram_state VALUES('offset',?)").run(String(offset))}
-async function send(chatId:number,text:string,keyboard?:unknown){await telegramCall('sendMessage',{chat_id:chatId,text,...(keyboard?{reply_markup:keyboard}:{})})}
-while(true){try{const updates=await telegramCall('getUpdates',{offset,timeout:25,allowed_updates:['message','callback_query']});for(const u of updates){const m=u.message;const callback=u.callback_query;const chatId=m?.chat?.id||callback?.message?.chat?.id;const text=m?.text||'';if(chatId&&(m?.chat?.type||callback?.message?.chat?.type)==='private'){let link:any;const start=text.match(/^\/start(?:@\w+)?(?:\s+([A-Za-z0-9_-]+))?$/);if(start?.[1]){link=database.prepare('SELECT * FROM telegram_links WHERE code=?').get(start[1]);if(link&&(!link.chatId||link.chatId===String(chatId))){database.prepare('UPDATE telegram_links SET chatId=NULL WHERE chatId=? AND code<>?').run(String(chatId),link.code);database.prepare('UPDATE telegram_links SET chatId=? WHERE code=?').run(String(chatId),link.code)}else link=undefined}else link=database.prepare('SELECT * FROM telegram_links WHERE chatId=?').get(String(chatId));
-if(!link){await send(chatId,'Вітаю 🤍 Щоб продовжити замовлення з вашими деталями, відкрийте кнопку «Продовжити в Telegram» після заявки на сайті. Якщо заявки ще немає — розкажіть нам у чаті сайту, для кого хочете пісню.')}else{const before=conversation(link.orderId);let c=before;if(callback?.data==='confirm'){c=conversation(link.orderId,undefined,true);await telegramCall('answerCallbackQuery',{callback_query_id:callback.id})}else if(!start&&text)c=conversation(link.orderId,text);
-const replies=before.mode==='producer'?[]:start?(before.messages.length<=2?before.messages.filter(x=>x.role==='assistant'): [{role:'assistant',text:'Вітаю знову 🤍 Вашу заявку знайдено — продовжимо з того місця, де зупинилися.'},...before.messages.filter(x=>x.role==='assistant').slice(-1)]):c.messages.slice(before.messages.length).filter(x=>x.role==='assistant');for(const reply of replies)await send(chatId,reply.text);if(c.mode!=='producer'&&c.canConfirm)await send(chatId,'Підтвердіть підсумок або напишіть, що змінити.',{inline_keyboard:[[{text:'Так, усе правильно 🤍',callback_data:'confirm'}]]});if(c.mode!=='producer'&&c.confirmed&&c.paymentLink)await send(chatId,'Посилання для оплати вашого замовлення:',{inline_keyboard:[[{text:'Перейти до оплати',url:c.paymentLink}]]});}}
-offset=u.update_id+1;database.prepare("INSERT OR REPLACE INTO telegram_state VALUES('offset',?)").run(String(offset));}}
-catch{console.log('Telegram connection paused; retrying in 5 seconds');await new Promise(r=>setTimeout(r,5000))}}
+let offset = Number((database.prepare("SELECT value FROM telegram_state WHERE key='offset'").get() as {value:string}|undefined)?.value || 0);
+while (true) {
+  try {
+    const updates = await telegramCall('getUpdates', { offset, timeout: 25, allowed_updates: ['message', 'callback_query'] });
+    for (const update of updates) {
+      const result = await processTelegramUpdate(update, telegramCall);
+      if (result.needsReview) console.log('Telegram delivery requires review for update ' + result.updateId);
+      offset = result.updateId + 1;
+      database.prepare("INSERT OR REPLACE INTO telegram_state VALUES('offset',?)").run(String(offset));
+    }
+  } catch {
+    console.log('Telegram connection paused; retrying in 5 seconds');
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }
+}

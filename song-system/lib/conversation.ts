@@ -1,6 +1,8 @@
-import {createHmac,randomBytes} from 'node:crypto';
+import {createHmac} from 'node:crypto';
+import {telegramLink} from './telegram-links';
 import {db} from './db';
 import type {Order} from './model';
+import type {Interpretation} from './olena-interpreter';
 import {explicitDetails,reaction,storySignals,toneOf,type Tone} from './olena-context';
 
 export function chatToken(id:string){return createHmac('sha256',process.env.SESSION_SECRET!).update('chat:'+id).digest('hex')}
@@ -86,7 +88,11 @@ function save(id:string,state:State,order:Order,changed:boolean,feedbackOnly=fal
  db().prepare('UPDATE orders SET body=? WHERE id=?').run(JSON.stringify(feedbackOnly?{...order,notes,revision:order.revision+1}:{...order,communicationMode:state.mode,handoffReason:state.handoffReason||'',revision:order.revision+1,status:order.status==='Нове звернення'?'Збір інформації':order.status,nextAction:state.mode==='producer'?'Продюсеру: '+state.handoffReason:!['Нове звернення','Збір інформації'].includes(order.status)?order.nextAction:state.confirmed?'Перевірити погоджений бриф та оплату':'Переглянути діалог і доповнити бриф',notes}),id);
 }
 export function resumeConversation(id:string){return db().transaction(()=>{const {state,order}=load(id);state.mode='assistant';state.handoffReason=undefined;save(id,state,order,true);return {ok:true}})()}
-export function conversation(id:string,message?:string,confirm=false){return db().transaction(()=>{
+export function dialogueContext(id:string,message?:string){
+ const {state,order}=load(id);
+ return {revision:order.revision,mode:state.mode,messages:state.messages.map(({role,text})=>({role,text})),facts:{...state.answers,recipient:order.recipient} as Record<string,string>,message:message??(state.messages.length===1?order.opening||'':'')};
+}
+export function conversation(id:string,message?:string,confirm=false,interpreted?:{revision:number;proposal:Interpretation}){return db().transaction(()=>{
  const {order,state}=load(id);if(readiness(state,order)!=='confirmed')state.confirmed=false;
  if(!message&&!confirm&&state.messages.length===1&&order.opening)message=order.opening;
  const originalCount=state.messages.length;const say=(text:string)=>state.messages.push({role:'assistant',text:state.tone==='memory'?text.replace(/[🤍🙂❤️]/gu,'').replace(/ +(?=\n|$)/g,''):text});
@@ -140,6 +146,33 @@ export function conversation(id:string,message?:string,confirm=false){return db(
     const answer=answerQuestion(message,order);
     if(answer)say(answer+'\n\n'+(next(state,order)||'Якщо деталі правильні, підтвердіть підсумок. Або напишіть, що змінити.'));
     else handoff('Потрібна відповідь на питання: '+message.slice(0,300));
+   }else if(interpreted&&interpreted.revision===order.revision){
+    const proposal=interpreted.proposal;
+    let changed=false;
+    for(const update of proposal.updates){
+     if(!message.includes(update.evidence)||update.value.length>(['story'].includes(update.field)?15000:100))continue;
+     const previous=update.field==='recipient'?order.recipient:state.answers[update.field];
+     const known=previous&&previous!=='Не вказано';
+     if(known&&previous!==update.value&&!update.correction&&!['story','sound','avoid'].includes(update.field))continue;
+     const value=update.field==='story'&&!update.correction&&previous?[previous,update.value].join('\n'):update.value;
+     if(previous===value)continue;
+     if(update.field==='recipient'){
+      order.recipient=value;
+      if(known&&update.correction){delete state.answers.sender;if(state.facts)delete state.facts.sender;}
+     }else{
+      state.answers[update.field]=value;
+      if(['occasion','eventDate','story'].includes(update.field))(order as unknown as Record<string,unknown>)[update.field]=value;
+     }
+     remember(update.field,value);changed=true;
+    }
+    if(changed)markChanged();
+    state.tone=toneOf([state.answers.occasion,state.answers.story,message].join(' '));
+    if(proposal.action==='handoff')handoff('Потрібна допомога продюсера');
+    else if(proposal.action==='summarize')say(readiness(state,order)==='ready_for_review'?summary(state,order):next(state,order)||'Який особистий спогад хочете передати в пісні?');
+    else{
+     const unsafe=/грн|₴|долар|євро|paypal|оплат|передоплат|рахунок|картк|реквізит|знижк|годин|днів|https?:|погоджено|підтверджено/iu.test(proposal.reply);
+     say(unsafe?(next(state,order)||summary(state,order)):proposal.reply);
+    }
    }else{
     const field=nextField(state,order);
     const details=explicitDetails(message);
@@ -200,8 +233,7 @@ export function conversation(id:string,message?:string,confirm=false){return db(
   say(next(state,order)||summary(state,order));
  }
  save(id,state,order,state.messages.length!==originalCount);
- db().exec('CREATE TABLE IF NOT EXISTS telegram_links(code TEXT PRIMARY KEY,orderId TEXT NOT NULL,chatId TEXT UNIQUE)');let link=db().prepare('SELECT code FROM telegram_links WHERE orderId=? LIMIT 1').get(id) as {code:string}|undefined;
- if(!link){link={code:randomBytes(24).toString('base64url')};db().prepare('INSERT INTO telegram_links(code,orderId) VALUES(?,?)').run(link.code,id);}
+ const link=telegramLink(id);
  return {telegramUrl:'https://t.me/podaruy_pisnyu_bot?start='+link.code,messages:state.messages,mode:state.mode,handoffReason:state.handoffReason,storyReadiness:readiness(state,order),canConfirm:state.mode==='assistant'&&state.reviewed===true&&readiness(state,order)==='ready_for_review',confirmed:readiness(state,order)==='confirmed',paymentLink:state.mode==='assistant'&&readiness(state,order)==='confirmed'?order.paymentLink:''};
 })()}
 
