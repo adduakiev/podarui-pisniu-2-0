@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {"title": "Пісня на день народження на замовлення | Подаруй пісню", "description": "Пісня з ім’ям і Вашими спогадами. 2000 грн, передоплата 1000 грн. До 48 годин після повного брифу."};
 
 export default function Page() {
-  return <SongLanding content={{
+  return <SongLanding sourcePage="/pisnia-na-den-narodzhennia" content={{
   "heading": "Пісня на день народження, у якій впізнають свою історію",
   "intro": "Те саме знайомство. Сімейний жарт. Слова, які давно хотілося сказати. Розкажіть про близьку людину, а ми створимо пісню спеціально для неї.",
   "cta": "Розповісти про іменинника",

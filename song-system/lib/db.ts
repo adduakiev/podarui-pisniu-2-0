@@ -18,14 +18,14 @@ class LocalDatabase extends DatabaseSync {
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { deadline, plans, type Order, type Media, orderSchema, updateSchema } from './model';
+import { landingDefaults, deadline, plans, type Order, type Media, orderSchema, updateSchema } from './model';
 let instance:LocalDatabase;
 export function db(){
  if(process.env.LOCAL_ONLY!=='1'||process.env.VERCEL) throw new Error('Local storage only: configure cloud persistence before deployment');
  if(!instance){const dir=process.env.DATA_DIR||join(process.cwd(),'data');mkdirSync(dir,{recursive:true});instance=new LocalDatabase(join(dir,'system.sqlite'));instance.exec('PRAGMA journal_mode = WAL');instance.exec(`CREATE TABLE IF NOT EXISTS orders(id TEXT PRIMARY KEY, requestId TEXT UNIQUE NOT NULL, body TEXT NOT NULL); CREATE TABLE IF NOT EXISTS payments(id TEXT PRIMARY KEY, orderId TEXT NOT NULL, amount INTEGER NOT NULL, note TEXT NOT NULL, createdAt TEXT NOT NULL); CREATE TABLE IF NOT EXISTS media(id TEXT PRIMARY KEY, body TEXT NOT NULL); CREATE TABLE IF NOT EXISTS audit(id TEXT PRIMARY KEY, orderId TEXT NOT NULL, body TEXT NOT NULL, createdAt TEXT NOT NULL);`)}return instance;
 }
 export function listOrders():Order[]{return db().prepare('SELECT body FROM orders ORDER BY rowid DESC').all().map((r:any)=>{const o=JSON.parse(r.body);o.paid=(db().prepare('SELECT COALESCE(SUM(amount),0) total FROM payments WHERE orderId=?').get(o.id) as any).total;return o})}
-export function createOrder(input:unknown,source?:Order['source']){const p=orderSchema.parse(input);return db().transaction(()=>{const old=db().prepare('SELECT body FROM orders WHERE requestId=?').get(p.requestId) as any;if(old)return JSON.parse(old.body).id;const id=randomUUID();const o={...p,source,id,createdAt:new Date().toISOString(),status:'Нове звернення',notes:'',nextAction:'Зв’язатися та уточнити історію',briefAt:null,dueAt:null,revision:0,paymentLink:'',amount:plans[p.plan],paid:0};db().prepare('INSERT INTO orders VALUES(?,?,?)').run(id,p.requestId,JSON.stringify(o));return id})()}
+export function createOrder(input:unknown,source?:Order['source']){const p=orderSchema.parse(input);return db().transaction(()=>{const old=db().prepare('SELECT body FROM orders WHERE requestId=?').get(p.requestId) as any;if(old)return JSON.parse(old.body).id;const id=randomUUID();const defaults=p.source_page?landingDefaults[p.source_page]:undefined;const provisional=defaults?Object.fromEntries(Object.entries(defaults).filter(([key,value])=>p[key as 'recipient'|'occasion']===value)):undefined;const o={...p,landing_defaults:provisional,source,id,createdAt:new Date().toISOString(),status:'Нове звернення',notes:'',nextAction:'Зв’язатися та уточнити історію',briefAt:null,dueAt:null,revision:0,paymentLink:'',amount:plans[p.plan],paid:0};db().prepare('INSERT INTO orders VALUES(?,?,?)').run(id,p.requestId,JSON.stringify(o));return id})()}
 export function updateOrder(input:unknown){
  const p=updateSchema.parse(input);
  const database=db();

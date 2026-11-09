@@ -15,7 +15,7 @@ export const questions=[
  {key:'sound',label:'Голос і настрій'},
  {key:'avoid',label:'Чого не згадувати'}
 ];
-type Fact={value:string;source_message_id:number|null;confidence:number;status:'explicit'|'inferred'|'unconfirmed'};
+type Fact={source_page?:Order['source_page'];value:string;source_message_id:number|null;confidence:number;status:'explicit'|'inferred'|'unconfirmed'};
 type State={factHistory?:Record<string,Fact[]>;facts?:Record<string,Fact>;topic?:string;universal?:boolean;reviewed?:boolean;tone?:Tone;answers:Record<string,string>;messages:{role:'assistant'|'user';text:string;feedback?:{replacement:string;reason:string}}[];confirmed:boolean;mode:'assistant'|'producer';handoffReason?:string};
 function load(id:string){
  db().exec('CREATE TABLE IF NOT EXISTS conversations(orderId TEXT PRIMARY KEY,body TEXT NOT NULL)');
@@ -24,6 +24,13 @@ function load(id:string){
  const order=JSON.parse(row.body) as Order;
  const saved=db().prepare('SELECT body FROM conversations WHERE orderId=?').get(id) as {body:string}|undefined;
  const state:State=saved?JSON.parse(saved.body):{answers:{occasion:order.occasion,eventDate:order.eventDate,story:order.story},messages:[{role:'assistant',text:'Добрий день! Мене звати Олена, я цифрова помічниця команди «Подаруй пісню». Дякую, що звернулися до нас!'}],confirmed:false,mode:'assistant'};
+ // Landing hints are retained as provenance, never promoted to customer facts.
+ if(!saved&&order.landing_defaults){
+  state.facts={};
+  for(const [key,value] of Object.entries(order.landing_defaults)){
+   if(value)state.facts[key]={value,source_page:order.source_page,source_message_id:null,confidence:0.35,status:'unconfirmed'};
+  }
+ }
  state.tone??=toneOf([state.answers.occasion,state.answers.story,order.recipient].join(' '));
  state.mode=order.communicationMode||state.mode||'assistant';
  return {order,state};
@@ -110,6 +117,8 @@ export function conversation(id:string,message?:string,confirm=false,interpreted
   if(state.mode!=='producer'){
    const edit=correction(message);
    const recipientCorrection=message.match(/^(?:це )?не для [^,]+,?\s+а (?:пісня )?для ([\p{L}’' -]+)[.!]?$/iu)?.[1]?.trim();
+   const occasionCorrection=message.match(/^(?:це )?не (?:на|до) [^,]+,?\s+а (?:на|до) ([^.!?]+)[.!]?$/iu)?.[1]?.trim();
+   const provisional=(key:string)=>state.facts?.[key]?.status==='unconfirmed';
    const remember=(key:string,value:string,status:Fact['status']='explicit')=>{
     const fact={value,source_message_id:state.messages.length-1,confidence:status==='explicit'?1:0.65,status};
     const history=state.factHistory??={};
@@ -132,6 +141,11 @@ export function conversation(id:string,message?:string,confirm=false,interpreted
     markChanged();
     say('Зрозуміла, змінила отримувача. '+(next(state,order)||summary(state,order)));
    }
+   else if(occasionCorrection){
+    order.occasion=occasionCorrection;state.answers.occasion=occasionCorrection;
+    remember('occasion',occasionCorrection);markChanged();
+    say('Зрозуміла, змінила привід. '+(next(state,order)||summary(state,order)));
+   }
    else if(edit){
     const keys:Record<string,string>={'дату':'eventDate','привід':'occasion','голос':'sound','настрій':'sound','історію':'story','імена':'sender','ім’я':'sender'};
     const key=keys[edit[1].toLowerCase()];const value=edit[2].trim();
@@ -153,9 +167,9 @@ export function conversation(id:string,message?:string,confirm=false,interpreted
      if(!message.includes(update.evidence)||update.value.length>(['story'].includes(update.field)?15000:100))continue;
      const previous=update.field==='recipient'?order.recipient:state.answers[update.field];
      const known=previous&&previous!=='Не вказано';
-     if(known&&previous!==update.value&&!update.correction&&!['story','sound','avoid'].includes(update.field))continue;
+     if(known&&!provisional(update.field)&&previous!==update.value&&!update.correction&&!['story','sound','avoid'].includes(update.field))continue;
      const value=update.field==='story'&&!update.correction&&previous?[previous,update.value].join('\n'):update.value;
-     if(previous===value)continue;
+     if(previous===value&&!provisional(update.field))continue;
      if(update.field==='recipient'){
       order.recipient=value;
       if(known&&update.correction){delete state.answers.sender;if(state.facts)delete state.facts.sender;}
@@ -188,15 +202,15 @@ export function conversation(id:string,message?:string,confirm=false,interpreted
     });
     const relation=recipientMatch?.[1];
     const recipientName=recipientMatch?message.slice(recipientMatch.index!+recipientMatch[0].length).match(/^\s+([А-ЯІЇЄҐ][а-яіїєґ’'ʼ-]+)(?=$|[\s,!.])/u)?.[1]:undefined;
-    if(relation&&order.recipient==='Не вказано'){order.recipient=relation;remember('recipient',relation);markChanged();}
+    if(relation&&(order.recipient==='Не вказано'||provisional('recipient'))){order.recipient=relation;remember('recipient',relation);markChanged();}
     if(recipientName&&!state.answers.sender)details.sender=recipientName;
     const narrator=message.match(/(?:від мого імені|від мене|від (?:дружини|чоловіка|дітей|доньки|сина|родини|коханого|коханої))(?=$|[\s,.!])/iu)?.[0];
     if(narrator){state.answers.narrator=narrator;remember('narrator',narrator);markChanged();}
     if((tone==='memory'||tone==='distance')&&!details.occasion&&!state.answers.occasion){details.occasion=tone==='memory'?'Пісня пам’яті':'Пісня підтримки';remember('occasion',details.occasion,'inferred');}
     let captured=false;
     for(const [key,value] of Object.entries(details)){
-     if(!value||state.answers[key]===value)continue;
-     if(state.answers[key]&&!['story','sound','avoid'].includes(key))continue;
+     if(!value||(state.answers[key]===value&&!provisional(key)))continue;
+     if(state.answers[key]&&!provisional(key)&&!['story','sound','avoid'].includes(key))continue;
      const saved=key==='story'&&state.answers.story?state.answers.story+'\n'+value:value;
      state.answers[key]=saved;captured=true;
      if(!(key==='occasion'&&state.facts?.occasion?.source_message_id===state.messages.length-1))remember(key,value);

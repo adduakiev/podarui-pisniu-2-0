@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {"title": "Пісня для мами на замовлення | Подаруй пісню", "description": "Пісня для мами з Вашими спогадами. 2000 грн, передоплата 1000 грн. До 48 годин після повного брифу."};
 
 export default function Page() {
-  return <SongLanding content={{
+  return <SongLanding sourcePage="/pisnia-dlia-mamy" content={{
   "heading": "Пісня для мами зі словами, які хочеться сказати саме їй",
   "intro": "Її улюблена фраза. Ваші розмови на кухні. Те, як вона завжди знала, коли Вам потрібна підтримка. Зберемо ці спогади в особисту пісню.",
   "cta": "Розповісти про маму",

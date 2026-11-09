@@ -1,3 +1,4 @@
+import type { SourcePage } from '@/lib/model';
 import { listMedia } from '@/lib/db';
 import { OrderFlow, OrderForm } from './widgets';
 
@@ -10,7 +11,7 @@ type LandingContent = {
   sections: { heading: string; paragraphs: string[] }[];
 };
 
-export function SongLanding({ content }: { content: LandingContent }) {
+export function SongLanding({ content, sourcePage }: { content: LandingContent; sourcePage: SourcePage }) {
   const examples = listMedia(true).filter(item => item.kind === 'song');
 
   return <OrderFlow><div className="public-site">
@@ -50,7 +51,7 @@ export function SongLanding({ content }: { content: LandingContent }) {
         <p className="eyebrow">ПОЧНЕМО З ВАШОЇ ІСТОРІЇ</p>
         <h2>{content.cta}</h2>
         <p>Можете почати з кількох слів або поставити запитання.</p>
-        <OrderForm testMode={process.env.LOCAL_ONLY === '1'} recipient={content.recipient} occasion={content.occasion}/>
+        <OrderForm testMode={process.env.LOCAL_ONLY === '1'} recipient={content.recipient} occasion={content.occasion} sourcePage={sourcePage}/>
       </section>
     </main>
     <footer className="footer"><a href="/">Подаруй пісню</a><a href="/legal/data">Обробка даних</a></footer>
