@@ -1,0 +1,2 @@
+import { notFound } from 'next/navigation';import docs from '@/lib/legal.json';
+export default async function Legal({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const d=docs[slug as keyof typeof docs];if(!d)notFound();return <main className="section legal"><a href="/">← На головну</a><h1>{d.title}</h1><p className="test-note">Копія документа з чинного сайту. Остаточну редакцію для нової системи ще не опубліковано.</p><div style={{whiteSpace:'pre-wrap'}}>{d.text}</div></main>}
