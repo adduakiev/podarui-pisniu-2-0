@@ -1,7 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
-import { activeOrderId, conversation, contactPause } from './conversation';
+import { activeOrderId, contactPause } from './conversation';
 import { createOrder, db } from './db';
+import {processInbound,deliveryCurrent} from './process-inbound';
+import type {Interpreter} from './olena-interpreter';
 import { redeemTelegramLink, telegramLink, telegramLinks } from './telegram-links';
 
 const chat = z.object({ id: z.number().int(), type: z.string() });
@@ -15,12 +17,13 @@ const updateSchema = z.object({
 });
 type Outbound = {
   orderId?:string;
+  revision?:number;
   pauseAcknowledgementIndex?:number;
   method: string;
   payload: Record<string, unknown>;
   state: 'pending' | 'sending' | 'sent' | 'uncertain' | 'suppressed';
 };
-type Delivery = { outbound: Outbound[] };
+type Delivery = { outbound: Outbound[];preparing?:boolean;inbound?:unknown };
 type Transport = (method: string, payload: Record<string, unknown>) => Promise<unknown>;
 
 function table() {
@@ -30,11 +33,13 @@ function table() {
 }
 
 function save(updateId: number, delivery: Delivery) {
+  const prior=table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?').get(updateId) as {body:string}|undefined;
+  if(prior&&delivery.inbound===undefined)delivery.inbound=JSON.parse(prior.body).inbound;
   table().prepare('INSERT OR REPLACE INTO telegram_deliveries VALUES(?,?)')
     .run(updateId, JSON.stringify(delivery));
 }
 
-function prepare(input: unknown, now: number) {
+function prepare(input: unknown, now: number,interpreter?:Interpreter) {
   const update = updateSchema.parse(input);
   const database = table();
   return database.transaction(() => {
@@ -43,8 +48,9 @@ function prepare(input: unknown, now: number) {
     if (saved) return update.update_id;
     const outbound: Outbound[] = [];
     let deliveryOrderId:string|undefined;
+    let deliveryRevision:number|undefined;
     const send = (text: string, keyboard?: unknown, pauseAcknowledgementIndex?:number) => outbound.push({
-      orderId:deliveryOrderId,pauseAcknowledgementIndex,method: 'sendMessage',
+      orderId:deliveryOrderId,revision:deliveryRevision,pauseAcknowledgementIndex,method: 'sendMessage',
       payload: { chat_id: target!.id, text, ...(keyboard ? { reply_markup: keyboard } : {}) },
       state: 'pending',
     });
@@ -79,7 +85,7 @@ function prepare(input: unknown, now: number) {
     } else if (!orderId && (text || start) && !invalidCommand) {
       const createdId: string = createOrder({
         name: 'Клієнт Telegram', contact: 'Telegram:' + target.id,
-        recipient: 'Не вказано', channel: 'Telegram', requestId: randomUUID(),
+        recipient: 'Не вказано', opening:start?undefined:text, channel: 'Telegram', requestId: randomUUID(),
       }, 'telegram');
       orderId = createdId;
       const link = telegramLink(createdId, now);
@@ -95,43 +101,48 @@ function prepare(input: unknown, now: number) {
         save(update.update_id, { outbound });
         return update.update_id;
       }
-      const before = fresh ? undefined : conversation(orderId);
-      const result = fresh
-        ? conversation(orderId, start ? undefined : text)
-        : (update.callback_query?.data === 'confirm:'+before?.orderId || (update.callback_query?.data === 'confirm' && before?.orderId===orderId && !(JSON.parse((database.prepare('SELECT body FROM orders WHERE id=?').get(orderId) as {body:string}).body).previousOrderId)))
-          ? conversation(orderId, undefined, true)
-          : !start && text && !invalidCommand
-            ? conversation(orderId, text)
-            : before!;
-      if(result.orderId!==orderId){
-        const nextLink=telegramLink(result.orderId,now);
-        if (!redeemTelegramLink(nextLink.code,String(target.id),now)) throw new Error('SUCCESSOR_BINDING_DENIED');
-      }
-      deliveryOrderId=result.orderId;
-      const changedOrder=before?.orderId!==result.orderId;
-      const replies = result.contactPaused ? (before?.contactPaused?[]:result.messages.filter((_message,index)=>index===result.pauseAcknowledgementIndex)) : before?.mode === 'producer' && !changedOrder ? []
-        : (fresh || changedOrder) ? result.messages.filter(message => message.role === 'assistant')
-          : start ? before!.messages.filter(message => message.role === 'assistant').slice(-1)
-            : result.messages.slice(before!.messages.length).filter(message => message.role === 'assistant');
-      for (const reply of replies) send(reply.text,undefined,result.contactPaused?result.pauseAcknowledgementIndex:undefined);
-      if (result.mode !== 'producer' && result.canConfirm) {
-        send('Підтвердіть підсумок або напишіть, що змінити.', {
-          inline_keyboard: [[{ text: 'Так, усе правильно 🤍', callback_data: 'confirm:'+result.orderId }]],
-        });
-      }
-      if (result.mode !== 'producer' && result.confirmed && result.paymentLink) {
-        send('Посилання для оплати вашого замовлення:', {
-          inline_keyboard: [[{ text: 'Перейти до оплати', url: result.paymentLink }]],
-        });
-      }
+      save(update.update_id,{outbound:[],preparing:true,inbound:update});
+      return async()=>{
+        const before = fresh ? undefined : await processInbound({orderId,channel:'telegram',snapshot:true});
+        const result = fresh
+          ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),message:start?undefined:text},interpreter)
+          : (update.callback_query?.data === 'confirm:'+before?.orderId || (update.callback_query?.data === 'confirm' && before?.orderId===orderId && !(JSON.parse((database.prepare('SELECT body FROM orders WHERE id=?').get(orderId) as {body:string}).body).previousOrderId)))
+            ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),confirm:true},interpreter)
+            : !start && text && !invalidCommand
+              ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),message:text},interpreter)
+              : before!;
+        if(result.orderId!==orderId){
+          const nextLink=telegramLink(result.orderId,now);
+          if (!redeemTelegramLink(nextLink.code,String(target.id),now)) throw new Error('SUCCESSOR_BINDING_DENIED');
+        }
+        deliveryOrderId=result.orderId;deliveryRevision=result.deliveryRevision;
+        const changedOrder=before?.orderId!==result.orderId;
+        const replies = result.suppressReply?[]:result.contactPaused ? (before?.contactPaused?[]:result.messages.filter((_message,index)=>index===result.pauseAcknowledgementIndex)) : before?.mode === 'producer' && !changedOrder ? []
+          : (fresh || changedOrder) ? result.messages.filter(message => message.role === 'assistant')
+            : start ? before!.messages.filter(message => message.role === 'assistant').slice(-1)
+              : result.messages.slice(before!.messages.length).filter(message => message.role === 'assistant');
+        for (const reply of replies) send(reply.text,undefined,result.contactPaused?result.pauseAcknowledgementIndex:undefined);
+        if (!result.suppressReply && result.mode !== 'producer' && result.canConfirm) {
+          send('Підтвердіть підсумок або напишіть, що змінити.', {
+            inline_keyboard: [[{ text: 'Так, усе правильно 🤍', callback_data: 'confirm:'+result.orderId }]],
+          });
+        }
+        if (!result.suppressReply && result.mode !== 'producer' && result.confirmed && result.paymentLink) {
+          send('Посилання для оплати вашого замовлення:', {
+            inline_keyboard: [[{ text: 'Перейти до оплати', url: result.paymentLink }]],
+          });
+        }
+        save(update.update_id,{outbound});return update.update_id;
+      };
     }
     save(update.update_id, { outbound });
     return update.update_id;
   })();
 }
 
-export async function processTelegramUpdate(input: unknown, transport: Transport, now = Date.now()) {
-  const updateId = prepare(input, now);
+export async function processTelegramUpdate(input: unknown, transport: Transport, now = Date.now(),interpreter?:Interpreter) {
+  const prepared = prepare(input, now,interpreter);
+  const updateId = typeof prepared==='function'?await prepared():prepared;
   while (true) {
     const delivery = db().transaction(() => {
       const row = table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?')
@@ -149,7 +160,8 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
         const bound=next.orderId?undefined:db().prepare('SELECT orderId FROM telegram_links WHERE chatId=?').get(String(next.payload.chat_id)) as {orderId:string}|undefined;
         const id=next.orderId||bound?.orderId;
         const pause=id?contactPause(id):undefined;
-        if(!pause?.paused||next.pauseAcknowledgementIndex!==undefined&&next.pauseAcknowledgementIndex===pause.acknowledgementIndex)break;
+        const current=next.revision===undefined||!!id&&deliveryCurrent(id,next.revision);
+        if(current&&(!pause?.paused||next.pauseAcknowledgementIndex!==undefined&&next.pauseAcknowledgementIndex===pause.acknowledgementIndex))break;
         next.state='suppressed';save(updateId,delivery);next=delivery.outbound.find(item=>item.state==='pending');
       }
       if (!next) return;
@@ -168,5 +180,5 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
   }
   const row = table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?').get(updateId) as { body: string };
   const delivery: Delivery = JSON.parse(row.body);
-  return { updateId, needsReview: delivery.outbound.some(item => item.state === 'uncertain') };
+  return { updateId, needsReview: !!delivery.preparing||delivery.outbound.some(item => item.state === 'uncertain') };
 }

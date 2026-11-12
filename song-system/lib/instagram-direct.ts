@@ -1,7 +1,9 @@
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
 import { z } from 'zod';
-import { conversation,contactPause } from './conversation';
+import { contactPause } from './conversation';
 import { createOrder, db } from './db';
+import {processInbound,deliveryCurrent} from './process-inbound';
+import type {Interpreter} from './olena-interpreter';
 
 const identifier = z.string().min(1).max(200);
 const messaging = z.object({
@@ -21,6 +23,7 @@ const delivery = z.object({
 
 type Reply = { accountId: string; senderId: string; inboundId: string; text: string };
 type Dependencies = {
+  interpreter?:Interpreter;
   appSecret: string;
   verifyToken: string;
   accountIds: ReadonlySet<string>;
@@ -33,20 +36,21 @@ function signed(raw: Buffer, signature: string | null, secret: string) {
   return timingSafeEqual(expected, Buffer.from(signature.slice(7), 'hex'));
 }
 
-function record(accountId: string, senderId: string, inboundId: string, message: string) {
+async function record(accountId: string, senderId: string, inboundId: string, message: string,interpreter?:Interpreter) {
   const database = db();
   database.exec(`
     CREATE TABLE IF NOT EXISTS instagram_threads (
       accountId TEXT NOT NULL, senderId TEXT NOT NULL, orderId TEXT NOT NULL,
       PRIMARY KEY (accountId, senderId)
     );
+    CREATE TABLE IF NOT EXISTS instagram_inbound_payloads(accountId TEXT NOT NULL,inboundId TEXT NOT NULL,senderId TEXT NOT NULL,message TEXT NOT NULL,receivedAt TEXT NOT NULL,PRIMARY KEY(accountId,inboundId));
     CREATE TABLE IF NOT EXISTS instagram_inbound (
       accountId TEXT NOT NULL, inboundId TEXT NOT NULL, senderId TEXT NOT NULL,
       reply TEXT, sentAt TEXT,
       PRIMARY KEY (accountId, inboundId)
     );
   `);
-  return database.transaction(() => {
+  const prepared=database.transaction(() => {
     const key = [accountId, inboundId];
     if (database.prepare('SELECT 1 FROM instagram_inbound WHERE accountId=? AND inboundId=?').get(...key)) return;
     const thread = database.prepare('SELECT orderId FROM instagram_threads WHERE accountId=? AND senderId=?')
@@ -54,22 +58,27 @@ function record(accountId: string, senderId: string, inboundId: string, message:
     const orderId = thread?.orderId ?? createOrder({
       name: 'Клієнт Instagram',
       contact: ('Instagram:' + senderId).slice(0, 200),
-      recipient: 'Не вказано',
+      recipient: 'Не вказано', opening:message,
       channel: 'Instagram',
       requestId: randomUUID(),
     }, 'instagram');
     if (!thread) {
       database.prepare('INSERT INTO instagram_threads VALUES (?, ?, ?)').run(accountId, senderId, orderId);
     }
-    const before = thread ? conversation(orderId) : undefined;
-    const result = conversation(orderId, message);
+    database.prepare('INSERT INTO instagram_inbound (accountId,inboundId,senderId) VALUES(?,?,?)').run(accountId,inboundId,senderId);
+    database.prepare('INSERT INTO instagram_inbound_payloads VALUES(?,?,?,?,?)').run(accountId,inboundId,senderId,message,new Date().toISOString());
+    return {orderId,fresh:!thread};
+  })();
+  if(!prepared)return;
+  const {orderId,fresh}=prepared;
+  const before=fresh?undefined:await processInbound({orderId,channel:'instagram',snapshot:true});
+  const result=await processInbound({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message},interpreter);
+  return database.transaction(()=>{
     if(result.orderId!==orderId)database.prepare('UPDATE instagram_threads SET orderId=? WHERE accountId=? AND senderId=?').run(result.orderId,accountId,senderId);
-    const replies=result.contactPaused?(before?.contactPaused?[]:result.messages.filter((_item,index)=>index===result.pauseAcknowledgementIndex)):result.messages.slice(before?.orderId===result.orderId?before.messages.length:0);
-    const text = replies.filter(item => item.role === 'assistant')
-      .map(item => item.text).join('\n\n');
-    database.prepare('INSERT INTO instagram_inbound (accountId, inboundId, senderId, reply) VALUES (?, ?, ?, ?)')
-      .run(accountId, inboundId, senderId, text || null);
-    return {text,orderId:result.orderId,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
+    const replies=result.suppressReply?[]:result.contactPaused?(before?.contactPaused?[]:result.messages.filter((_item,index)=>index===result.pauseAcknowledgementIndex)):result.messages.slice(before?.orderId===result.orderId?before.messages.length:0);
+    const text=replies.filter(item=>item.role==='assistant').map(item=>item.text).join('\n\n');
+    database.prepare('UPDATE instagram_inbound SET reply=? WHERE accountId=? AND inboundId=?').run(text||null,accountId,inboundId);
+    return {text,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
   })();
 }
 
@@ -105,8 +114,8 @@ export function createInstagramWebhook(deps: Dependencies) {
         if (!parsed.success) continue;
         const { sender, recipient, message } = parsed.data;
         if (recipient.id !== entry.id || sender.id === entry.id || message.is_echo || message.is_self) continue;
-        const reply = record(entry.id, sender.id, message.mid, message.text);
-        if (!reply?.text) continue;
+        const reply = await record(entry.id, sender.id, message.mid, message.text,deps.interpreter);
+        if (!reply?.text||!deliveryCurrent(reply.orderId,reply.revision)) continue;
         const pause=contactPause(reply.orderId);
         if(pause.paused&&(reply.pauseAcknowledgementIndex===undefined||reply.pauseAcknowledgementIndex!==pause.acknowledgementIndex))continue;
         const text=reply.text;

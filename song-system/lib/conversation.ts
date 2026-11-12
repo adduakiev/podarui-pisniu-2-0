@@ -413,9 +413,14 @@ function conversationTurn(id:string,message?:string,confirm=false,interpreted?:{
   say(next(state,order)||summary(state,order));
  }
  save(id,state,order,state.messages.length!==originalCount);
- const link=telegramLink(id);
- return {contactPaused:!!order.contactPaused,pauseAcknowledgementIndex:state.pauseAcknowledgementIndex,telegramUrl:'https://t.me/podaruy_pisnyu_bot?start='+link.code,messages:state.messages,mode:state.mode,handoffReason:state.handoffReason,storyReadiness:readiness(state,order),canConfirm:state.mode==='assistant'&&state.reviewed===true&&readiness(state,order)==='ready_for_review',confirmed:readiness(state,order)==='confirmed',paymentLink:state.mode==='assistant'&&readiness(state,order)==='confirmed'?order.paymentLink:''};
+ return conversationView(id,state,order);
 })()}
+
+function conversationView(id:string,state:State,order:Order){
+ const link=telegramLink(id);
+ return {deliveryRevision:load(id).order.revision,contactPaused:!!order.contactPaused,pauseAcknowledgementIndex:state.pauseAcknowledgementIndex,telegramUrl:'https://t.me/podaruy_pisnyu_bot?start='+link.code,messages:state.messages,mode:state.mode,handoffReason:state.handoffReason,storyReadiness:readiness(state,order),canConfirm:state.mode==='assistant'&&state.reviewed===true&&readiness(state,order)==='ready_for_review',confirmed:readiness(state,order)==='confirmed',paymentLink:state.mode==='assistant'&&readiness(state,order)==='confirmed'?order.paymentLink:''};
+}
+export function dialogueSnapshot(id:string){id=activeOrderId(id);const {state,order}=load(id);return {...conversationView(id,state,order),orderId:id};}
 
 export function saveTestFeedback(id:string,index:number,feedback:{replacement:string;reason:string}){
  if(process.env.LOCAL_ONLY!=='1')throw Error('TEST_ONLY');
@@ -494,7 +499,7 @@ export function conversation(id:string,message?:string,confirm=false,interpreted
   // updates storedRevision without advancing applied, so it cannot cancel a newer turn.
   const stale=arrival&&(!!expected&&activeOrderId(id)!==id||arrival.sequence<applied||original.order.revision!==arrival.revision&&original.order.revision!==ordering?.storedRevision);
   if(stale){
-   const result={...conversationTurn(id,message,false,undefined,true),orderId:id};
+   const result={...conversationTurn(id,message,false,undefined,true),orderId:id,stale:true as const};
    db().prepare('UPDATE conversation_ordering SET storedRevision=? WHERE orderId=?').run(load(id).order.revision,id);
    if(requestId)db().prepare('INSERT INTO conversation_requests VALUES(?,?,?,?)').run(id,requestId,input,JSON.stringify(result));
    return result;

@@ -1,0 +1,74 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "scenarios": [
+    {
+      "plan": "military",
+      "id": "3592888b-79da-4519-8b7f-7523c06b0666",
+      "openingPreserved": true,
+      "paid": 0,
+      "total": 100000,
+      "terms": {
+        "mode": "owner_deferred",
+        "currency": "UAH",
+        "total": 100000,
+        "required_before_start": 0,
+        "balance_due_trigger": "song_sent",
+        "owner_authorization": {
+          "actor": "Костя",
+          "at": "2026-11-12T22:08:43.794Z",
+          "reason": "Власник дозволяє військовому оплатити після надсилання пісні"
+        },
+        "agreedAt": "2026-11-12T22:08:43.794Z"
+      },
+      "lyricsTask": "adbf7a86-4cfd-4263-ae17-c51a9b86ad73",
+      "duplicateSameTask": true,
+      "unauthenticatedStatus": 403,
+      "deadlinePreserved": true,
+      "reload": true
+    },
+    {
+      "plan": "story",
+      "id": "7afd6658-965b-498c-a041-f6b55ce3866a",
+      "openingPreserved": true,
+      "paid": 100000,
+      "total": 200000,
+      "terms": {
+        "mode": "standard",
+        "currency": "UAH",
+        "total": 200000,
+        "required_before_start": 100000,
+        "balance_due_trigger": "song_sent",
+        "agreedAt": "2026-11-12T22:08:49.574Z"
+      },
+      "lyricsTask": "2cfe1685-37e5-4596-9271-3ef7e6bf3c33",
+      "duplicateSameTask": true,
+      "unauthenticatedStatus": 403,
+      "deadlinePreserved": true,
+      "reload": true
+    }
+  ],
+  "externalBlocked": [],
+  "pageErrors": [],
+  "ok": true,
+  "persistedProof": [
+    {
+      "orderId": "3592888b-79da-4519-8b7f-7523c06b0666",
+      "tasks": 1,
+      "payments": {
+        "n": 0,
+        "total": 0
+      }
+    },
+    {
+      "orderId": "7afd6658-965b-498c-a041-f6b55ce3866a",
+      "tasks": 1,
+      "payments": {
+        "n": 1,
+        "total": 100000
+      }
+    }
+  ]
+}
