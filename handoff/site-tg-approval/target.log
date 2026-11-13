@@ -1,0 +1,19 @@
+✔ forwarded unbound /start must not bind or reveal the saved reply/context (77.750299ms)
+✔ only correct existing web session approves; bad token, foreign order and CSRF cannot (42.462829ms)
+✔ attacker first pending gives no priority: owner rejects it and approves matching legitimate request (14.105347ms)
+✔ pending messages/retries never load context or create duplicate lead; successful approval enables fresh inbound (37.339276ms)
+✔ pending expiry cannot be approved; cancel rotates bearer and replay cannot reopen (30.466658ms)
+✔ chat already bound elsewhere cannot request transfer; a later competing binding blocks pending approval (43.475263ms)
+✔ competing approvals bind exactly one chat and close the other request (15.101921ms)
+✔ stop blocks approval; producer binding never bypasses existing send guard (38.768439ms)
+✔ two real worker processes race on SQLite: exactly one approval wins (345.36891ms)
+✔ owner can explicitly replace an expired pending link; old approval/replay stay invalid (14.674455ms)
+✔ legacy duplicate bearer rows cannot add a second chat to an already bound order (15.899025ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1101.526758

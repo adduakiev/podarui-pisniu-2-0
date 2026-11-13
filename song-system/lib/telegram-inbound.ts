@@ -1,3 +1,4 @@
+import {requestTelegramBinding,pendingTelegramForChat} from './telegram-approval';
 import {timeline,deliveryEventId} from './crm-records';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
@@ -78,8 +79,12 @@ function prepare(input: unknown, now: number,interpreter?:Interpreter) {
     // Captions never carry command/link authority.
     const start = hasText?text.match(/^\/start(?:@\w+)?(?:\s+([A-Za-z0-9_-]+))?$/):null;
     const invalidCommand = /^\//.test(text) && !start;
+    const request=start?.[1]?requestTelegramBinding(start[1],String(target.id),now):undefined;
+    if(request?.status==='pending'||(!start&&!database.prepare('SELECT 1 FROM telegram_links WHERE chatId=?').get(String(target.id))&&pendingTelegramForChat(String(target.id),now))){
+      send(request?.status==='pending'?`Поверніться до відкритої вкладки сайту та підтвердіть запит №${request.label}. Історію ще не передано.`:'Підтвердіть підключення у відкритій вкладці сайту. Історію ще не передано.');save(update.update_id,{outbound,inbound:update});return update.update_id;
+    }
     const linked = start?.[1]
-      ? redeemTelegramLink(start[1], String(target.id), now)
+      ? (request?.status==='bound'?request.link:undefined)
       : database.prepare('SELECT * FROM telegram_links WHERE chatId=?').get(String(target.id)) as { orderId: string } | undefined;
     let orderId = linked?.orderId;
     let fresh = false;

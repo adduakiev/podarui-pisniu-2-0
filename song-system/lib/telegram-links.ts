@@ -40,6 +40,12 @@ export function redeemTelegramLink(code: string, chatId: string, now = Date.now(
   return database.transaction(() => {
   const link = database.prepare('SELECT * FROM telegram_links WHERE code=?').get(code) as Link | undefined;
   if (!link || new Date(link.expiresAt).getTime() <= now || (link.chatId && link.chatId !== chatId)) return;
+  if(link.chatId===chatId)return link;
+  const order=JSON.parse((database.prepare('SELECT body FROM orders WHERE id=?').get(link.orderId) as {body:string}).body);
+  const prior=database.prepare('SELECT orderId FROM telegram_links WHERE chatId=?').get(chatId) as {orderId:string}|undefined;
+  // Native Telegram intake and an already-authorized successor are internal bindings.
+  // A site/unbound bearer is never authority to bind itself.
+  if(prior?order.previousOrderId!==prior.orderId:order.source!=='telegram')return;
   database.prepare('UPDATE telegram_links SET chatId=NULL,expiresAt=? WHERE chatId=? AND code<>?').run(new Date(now).toISOString(), chatId, code);
   database.prepare('UPDATE telegram_links SET chatId=? WHERE code=?').run(chatId, code);
   return { ...link, chatId };

@@ -1,3 +1,4 @@
+import {requestTelegramBinding,telegramBindingStatus,decideTelegramBinding} from '../../lib/telegram-approval';
 // Synthetic local fixtures only; adapters receive fake transport functions.
 import {createHmac} from 'node:crypto';
 import {telegramLink,redeemTelegramLink} from '../../lib/telegram-links';
@@ -6,7 +7,7 @@ import {createInstagramWebhook} from '../../lib/instagram-direct';
 import {db} from '../../lib/db';
 const id=process.env.QA_ORDER;
 if(!id||process.env.LOCAL_ONLY!=='1'||!process.env.DATA_DIR)throw Error('Isolated fixture required');
-redeemTelegramLink(telegramLink(id).code,'881');
+requestTelegramBinding(telegramLink(id).code,'881');decideTelegramBinding(id,telegramBindingStatus(id).pending[0].id,'approve');
 await processTelegramUpdate({update_id:881,message:{chat:{id:881,type:'private'},text:'Telegram: @synthetic_inbox'}},async()=>{throw Error('SYNTHETIC_UNCERTAIN')});
 const handler=createInstagramWebhook({appSecret:'fixture',verifyToken:'fixture',accountIds:new Set(['fixture-account']),send:async()=>{}});
 const body=JSON.stringify({object:'instagram',entry:[{id:'fixture-account',messaging:[{sender:{id:'fixture-sender'},recipient:{id:'fixture-account'},message:{mid:'mobile-direct',text:'Email: direct@example.test'}}]}]});
