@@ -152,6 +152,12 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
         if(!beginDelivery('telegram',delivery.jobEventId,delivery.claim))return;
         delivery.claimedDelivery=true;save(updateId,delivery);
       }
+      // claimedDelivery records acquisition, not continuing authority. Recheck
+      // persisted fencing before every transport call, including later batch items.
+      if(delivery.jobEventId){
+        const current=readJob(jobId('telegram',delivery.jobEventId));
+        if(!current||!delivery.claim||current.token!==delivery.claim||current.state!=='sending'||current.leaseUntil<=Date.now())return;
+      }
       // A crash after a send began has an unknown outcome. Keep it for review.
       const uncertain = delivery.outbound.find(item => item.state === 'sending');
       if (uncertain) {
@@ -184,7 +190,7 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
   }
   const row = table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?').get(updateId) as { body: string };
   const delivery: Delivery = JSON.parse(row.body);
-  if(delivery.jobEventId)endDelivery('telegram',delivery.jobEventId,delivery.claim,delivery.outbound.some(item=>item.state==='uncertain'));
+  if(delivery.jobEventId)endDelivery('telegram',delivery.jobEventId,delivery.claim,delivery.outbound.some(item=>['pending','sending','uncertain'].includes(item.state)));
   const job=readJob(jobId('telegram',String(updateId)));
-  return { updateId, needsReview: job?.state==='reconciled'?false:!!delivery.preparing||delivery.outbound.some(item => item.state === 'uncertain') };
+  return { updateId, needsReview: job?.state==='reconciled'?false:!!delivery.preparing||delivery.outbound.some(item => ['pending','sending','uncertain'].includes(item.state)) };
 }

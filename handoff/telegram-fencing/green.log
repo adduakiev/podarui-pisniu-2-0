@@ -1,0 +1,14 @@
+✔ RECOVERY-TG-01: owner resolve during first send prevents second send and replay (62.574669ms)
+✔ every Telegram send rechecks expired (17.291104ms)
+✔ every Telegram send rechecks token (12.535278ms)
+✔ every Telegram send rechecks uncertain (11.504494ms)
+✔ every Telegram send rechecks withheld (11.859926ms)
+✔ valid active claim still sends the complete batch once (11.981087ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 546.226773

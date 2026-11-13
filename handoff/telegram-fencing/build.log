@@ -1,0 +1,42 @@
+
+> podarui-pisniu-system@0.1.0 build
+> next build
+
+▲ Next.js 16.3.8 (Turbopack)
+✓ Running next.config.ts took 24ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.4s
+  Running TypeScript ...
+  Finished TypeScript in 853ms ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/10) ...
+  Generating static pages using 4 workers (2/10) 
+  Generating static pages using 4 workers (4/10) 
+  Generating static pages using 4 workers (7/10) 
+✓ Generating static pages using 4 workers (10/10) in 110ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /admin
+├ ƒ /admin/recovery
+├ ƒ /api/conversation
+├ ƒ /api/conversation-control
+├ ƒ /api/inbound-recovery
+├ ƒ /api/instagram/webhook
+├ ƒ /api/media
+├ ƒ /api/media/[id]
+├ ƒ /api/orders
+├ ƒ /api/session
+├ ƒ /api/telegram
+├ ○ /icon.png
+├ ƒ /legal/[slug]
+├ ƒ /pisnia-dlia-mamy
+└ ƒ /pisnia-na-den-narodzhennia
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
