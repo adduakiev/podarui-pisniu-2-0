@@ -1,0 +1,23 @@
+[
+  {
+    "channel": "site",
+    "baseline": "6a3740653257777d7a4f9bd7278cdcf9cb4a9da3",
+    "killed": "SIGKILL",
+    "before": "{\"error\":\"INBOUND_IN_PROGRESS\",\"sends\":0}",
+    "after": "{\"state\":\"ready_for_operator\",\"sends\":0}"
+  },
+  {
+    "channel": "telegram",
+    "baseline": "6a3740653257777d7a4f9bd7278cdcf9cb4a9da3",
+    "killed": "SIGKILL",
+    "before": "{\"updateId\":8001,\"needsReview\":true,\"sends\":0}",
+    "after": "{\"state\":\"ready_for_operator\",\"sends\":0}"
+  },
+  {
+    "channel": "instagram",
+    "baseline": "6a3740653257777d7a4f9bd7278cdcf9cb4a9da3",
+    "killed": "SIGKILL",
+    "before": "{\"status\":200,\"sends\":0}",
+    "after": "{\"state\":\"ready_for_operator\",\"sends\":0}"
+  }
+]

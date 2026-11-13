@@ -15,3 +15,5 @@ Checks: node --import tsx --test tests/*.test.ts; npm run typecheck; NEXT_TELEME
 Reusable practice: persist the inbound and claim its identity atomically before awaiting an interpreter; validate revision again before delivery. Tests assert db().isTransaction=false inside every injected interpreter/transport and verify that a delayed 'Хочу пісню для мами' cannot overwrite 'Не для мами, а для бабусі' or speak after 'Покличте менеджера'. Sources are existing conversation reservation and adapter outbox contracts in this repository; this slice retains those contracts across the async boundary.
 
 No production configuration, transport credentials, model rollout, main, merge or Notion changes are included. Cross-channel live quality and process-crash recovery remain separate release gates.
+
+Operator reconciliation is now available in `/admin/recovery`; see `docs/crash-recovery.md` for leases, protected recovery and review-only uncertain delivery. Historical author evidence for this slice remains unchanged.

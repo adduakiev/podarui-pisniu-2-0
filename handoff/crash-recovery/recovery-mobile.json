@@ -1,0 +1,28 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "externalRequests": [],
+  "pageErrors": [],
+  "killed": "SIGKILL",
+  "syntheticLeaseExpiry": true,
+  "unauthenticated": 403,
+  "recoveredState": "ready_for_operator",
+  "resolvedState": "reconciled",
+  "audit": [
+    {
+      "actor": "Костя",
+      "action": "recover"
+    },
+    {
+      "actor": "Костя",
+      "action": "resolve"
+    }
+  ],
+  "leads": 1,
+  "payments": 0,
+  "lyricsTasks": 0,
+  "sentReceipts": 0,
+  "ok": true
+}

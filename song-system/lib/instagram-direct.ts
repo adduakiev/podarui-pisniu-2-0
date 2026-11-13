@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { contactPause } from './conversation';
 import { createOrder, db } from './db';
 import {processInbound,deliveryCurrent} from './process-inbound';
+import {ensureInboundJob,beginDelivery,endDelivery,suppressJob,preparedCurrent} from './inbound-jobs';
 import type {Interpreter} from './olena-interpreter';
 
 const identifier = z.string().min(1).max(200);
@@ -67,6 +68,7 @@ async function record(accountId: string, senderId: string, inboundId: string, me
     }
     database.prepare('INSERT INTO instagram_inbound (accountId,inboundId,senderId) VALUES(?,?,?)').run(accountId,inboundId,senderId);
     database.prepare('INSERT INTO instagram_inbound_payloads VALUES(?,?,?,?,?)').run(accountId,inboundId,senderId,message,new Date().toISOString());
+    ensureInboundJob({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message});
     return {orderId,fresh:!thread};
   })();
   if(!prepared)return;
@@ -74,11 +76,12 @@ async function record(accountId: string, senderId: string, inboundId: string, me
   const before=fresh?undefined:await processInbound({orderId,channel:'instagram',snapshot:true});
   const result=await processInbound({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message},interpreter);
   return database.transaction(()=>{
+    if(!preparedCurrent('instagram',JSON.stringify([accountId,inboundId,'message']),result.deliveryClaim))return {text:'',claim:result.deliveryClaim,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:undefined};
     if(result.orderId!==orderId)database.prepare('UPDATE instagram_threads SET orderId=? WHERE accountId=? AND senderId=?').run(result.orderId,accountId,senderId);
     const replies=result.suppressReply?[]:result.contactPaused?(before?.contactPaused?[]:result.messages.filter((_item,index)=>index===result.pauseAcknowledgementIndex)):result.messages.slice(before?.orderId===result.orderId?before.messages.length:0);
     const text=replies.filter(item=>item.role==='assistant').map(item=>item.text).join('\n\n');
     database.prepare('UPDATE instagram_inbound SET reply=? WHERE accountId=? AND inboundId=?').run(text||null,accountId,inboundId);
-    return {text,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
+    return {text,claim:result.deliveryClaim,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
   })();
 }
 
@@ -115,16 +118,21 @@ export function createInstagramWebhook(deps: Dependencies) {
         const { sender, recipient, message } = parsed.data;
         if (recipient.id !== entry.id || sender.id === entry.id || message.is_echo || message.is_self) continue;
         const reply = await record(entry.id, sender.id, message.mid, message.text,deps.interpreter);
-        if (!reply?.text||!deliveryCurrent(reply.orderId,reply.revision)) continue;
+        const eventId=JSON.stringify([entry.id,message.mid,'message']);
+        if (!reply)continue;
+        if (!reply.text||!deliveryCurrent(reply.orderId,reply.revision)){suppressJob('instagram',eventId,reply.claim);continue;}
         const pause=contactPause(reply.orderId);
-        if(pause.paused&&(reply.pauseAcknowledgementIndex===undefined||reply.pauseAcknowledgementIndex!==pause.acknowledgementIndex))continue;
+        if(pause.paused&&(reply.pauseAcknowledgementIndex===undefined||reply.pauseAcknowledgementIndex!==pause.acknowledgementIndex)){suppressJob('instagram',eventId,reply.claim);continue;}
         const text=reply.text;
+        if(!beginDelivery('instagram',eventId,reply.claim))continue;
         try {
           await deps.send({ accountId: entry.id, senderId: sender.id, inboundId: message.mid, text });
         } catch {
+          endDelivery('instagram',eventId,reply.claim,true);
           // Keep the prepared reply for review. A webhook retry must not send it twice.
           continue;
         }
+        endDelivery('instagram',eventId,reply.claim,false);
         db().prepare('UPDATE instagram_inbound SET sentAt=? WHERE accountId=? AND inboundId=?')
           .run(new Date().toISOString(), entry.id, message.mid);
       }

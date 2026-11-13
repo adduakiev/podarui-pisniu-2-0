@@ -2,7 +2,8 @@ import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { activeOrderId, contactPause } from './conversation';
 import { createOrder, db } from './db';
-import {processInbound,deliveryCurrent} from './process-inbound';
+import {processInbound,deliveryCurrent,inboundSnapshot} from './process-inbound';
+import {ensureInboundJob,beginDelivery,endDelivery,readJob,jobId,preparedCurrent} from './inbound-jobs';
 import type {Interpreter} from './olena-interpreter';
 import { redeemTelegramLink, telegramLink, telegramLinks } from './telegram-links';
 
@@ -23,7 +24,7 @@ type Outbound = {
   payload: Record<string, unknown>;
   state: 'pending' | 'sending' | 'sent' | 'uncertain' | 'suppressed';
 };
-type Delivery = { outbound: Outbound[];preparing?:boolean;inbound?:unknown };
+type Delivery = { jobEventId?:string;claim?:string;claimedDelivery?:boolean;outbound: Outbound[];preparing?:boolean;inbound?:unknown };
 type Transport = (method: string, payload: Record<string, unknown>) => Promise<unknown>;
 
 function table() {
@@ -101,16 +102,15 @@ function prepare(input: unknown, now: number,interpreter?:Interpreter) {
         save(update.update_id, { outbound });
         return update.update_id;
       }
+      const before=fresh?undefined:inboundSnapshot(orderId);
+      const confirmed=update.callback_query?.data==='confirm:'+before?.orderId||(update.callback_query?.data==='confirm'&&before?.orderId===orderId&&!JSON.parse((database.prepare('SELECT body FROM orders WHERE id=?').get(orderId) as {body:string}).body).previousOrderId);
+      const hasTurn=fresh||confirmed||!!(!start&&text&&!invalidCommand);
+      const turnInput={orderId,channel:'telegram' as const,eventId:String(update.update_id),message:fresh?(start?undefined:text):confirmed?undefined:text,confirm:!fresh&&confirmed};
+      if(hasTurn)ensureInboundJob(turnInput);
       save(update.update_id,{outbound:[],preparing:true,inbound:update});
       return async()=>{
-        const before = fresh ? undefined : await processInbound({orderId,channel:'telegram',snapshot:true});
-        const result = fresh
-          ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),message:start?undefined:text},interpreter)
-          : (update.callback_query?.data === 'confirm:'+before?.orderId || (update.callback_query?.data === 'confirm' && before?.orderId===orderId && !(JSON.parse((database.prepare('SELECT body FROM orders WHERE id=?').get(orderId) as {body:string}).body).previousOrderId)))
-            ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),confirm:true},interpreter)
-            : !start && text && !invalidCommand
-              ? await processInbound({orderId,channel:'telegram',eventId:String(update.update_id),message:text},interpreter)
-              : before!;
+        const result=hasTurn?await processInbound(turnInput,interpreter):before!;
+        if(hasTurn&&!preparedCurrent('telegram',String(update.update_id),result.deliveryClaim))return update.update_id;
         if(result.orderId!==orderId){
           const nextLink=telegramLink(result.orderId,now);
           if (!redeemTelegramLink(nextLink.code,String(target.id),now)) throw new Error('SUCCESSOR_BINDING_DENIED');
@@ -132,7 +132,7 @@ function prepare(input: unknown, now: number,interpreter?:Interpreter) {
             inline_keyboard: [[{ text: 'Перейти до оплати', url: result.paymentLink }]],
           });
         }
-        save(update.update_id,{outbound});return update.update_id;
+        save(update.update_id,{outbound,jobEventId:hasTurn?String(update.update_id):undefined,claim:result.deliveryClaim});return update.update_id;
       };
     }
     save(update.update_id, { outbound });
@@ -148,6 +148,10 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
       const row = table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?')
         .get(updateId) as { body: string };
       const delivery: Delivery = JSON.parse(row.body);
+      if(delivery.jobEventId&&!delivery.claimedDelivery){
+        if(!beginDelivery('telegram',delivery.jobEventId,delivery.claim))return;
+        delivery.claimedDelivery=true;save(updateId,delivery);
+      }
       // A crash after a send began has an unknown outcome. Keep it for review.
       const uncertain = delivery.outbound.find(item => item.state === 'sending');
       if (uncertain) {
@@ -180,5 +184,7 @@ export async function processTelegramUpdate(input: unknown, transport: Transport
   }
   const row = table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?').get(updateId) as { body: string };
   const delivery: Delivery = JSON.parse(row.body);
-  return { updateId, needsReview: !!delivery.preparing||delivery.outbound.some(item => item.state === 'uncertain') };
+  if(delivery.jobEventId)endDelivery('telegram',delivery.jobEventId,delivery.claim,delivery.outbound.some(item=>item.state==='uncertain'));
+  const job=readJob(jobId('telegram',String(updateId)));
+  return { updateId, needsReview: job?.state==='reconciled'?false:!!delivery.preparing||delivery.outbound.some(item => item.state === 'uncertain') };
 }
