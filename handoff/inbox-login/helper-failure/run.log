@@ -1,0 +1,10 @@
+public-form
+login
+crm-order-selection
+locator.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.order-row').filter({ hasText: '<img src=x onerror="window.__contactXSS=1">' }).first()[22m
+
+    at /workspace/work/crm-inbox/song-system/tests/inbox-mobile.cjs:22:98 {
+  name: 'TimeoutError'
+}

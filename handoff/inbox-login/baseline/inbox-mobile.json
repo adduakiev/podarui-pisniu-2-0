@@ -1,0 +1,99 @@
+{
+  "http": [
+    {
+      "url": "http://127.0.0.1:3130/api/orders",
+      "status": 201,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/conversation",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/conversation",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=283b15e4-0704-4467-823b-00e3a19a1989",
+      "status": 403,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/session",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/orders",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/media",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=283b15e4-0704-4467-823b-00e3a19a1989",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/conversation-control",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=283b15e4-0704-4467-823b-00e3a19a1989",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/conversation-control",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=283b15e4-0704-4467-823b-00e3a19a1989",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=283b15e4-0704-4467-823b-00e3a19a1989",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:3130/api/inbox?id=ca8b4f9e-59df-429b-830d-ca5231728dcf",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "externalRequests": [],
+  "pageErrors": [],
+  "clientDenied": 403,
+  "contactsEscaped": true,
+  "allContactsVisible": true,
+  "telegramUncertainVisible": true,
+  "takeoverResume": true,
+  "reload": true,
+  "directSentAndIsolation": true,
+  "horizontalOverflow": false,
+  "ok": true
+}

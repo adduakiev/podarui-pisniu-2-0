@@ -1,0 +1,42 @@
+[
+  {
+    "file": "green/9c36a029c89572df28ec854ad902e6d8.webm",
+    "duration": "6.240000",
+    "size": "685489"
+  },
+  {
+    "file": "green/11499d6927b97be6aaf13bd07f398b60.webm",
+    "duration": "2.240000",
+    "size": "142238"
+  },
+  {
+    "file": "delayed/fda122373eff4726ec7f1d9f1f85f46d.webm",
+    "duration": "9.920000",
+    "size": "308860"
+  },
+  {
+    "file": "delayed/22b96dba439565d6da09b0a25658d0ed.webm",
+    "duration": "16.520000",
+    "size": "935070"
+  },
+  {
+    "file": "baseline/233aeec9d50626bbcda0150b55d05fb6.webm",
+    "duration": "6.120000",
+    "size": "637373"
+  },
+  {
+    "file": "baseline/dfe0da71e77875769a472c886c35303a.webm",
+    "duration": "2.160000",
+    "size": "150959"
+  },
+  {
+    "file": "helper-failure/b0680a7c72c6a162dad12b7e56eb330b.webm",
+    "duration": "34.520000",
+    "size": "766257"
+  },
+  {
+    "file": "helper-failure/fbd9e0b27b0c9321cce11f6d60ac22a9.webm",
+    "duration": "32.000000",
+    "size": "475190"
+  }
+]
