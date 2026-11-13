@@ -1,0 +1,121 @@
+✖ chat-first form is independent of LOCAL_ONLY=0 (15.846809ms)
+✖ chat-first form is independent of LOCAL_ONLY=1 (1.96414ms)
+✖ opening/question alone creates one lead with explicitly unknown name and original provenance (8.574131ms)
+✖ orders endpoint issues TTL immediately and retries reuse one link without extending expiry (16.796388ms)
+✖ issued link rejects another chat and expires at the recorded boundary (1.29838ms)
+✖ empty opening and invalid source remain rejected; origin and storage guards unchanged (4.137467ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 712.253569
+
+✖ failing tests:
+
+test at tests/site-chat-first.test.ts:2:1776
+✖ chat-first form is independent of LOCAL_ONLY=0 (15.846809ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(html.includes('name="opening"'))
+
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:5:257)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/site-chat-first.test.ts:2:1776
+✖ chat-first form is independent of LOCAL_ONLY=1 (1.96414ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+    assert.ok(html.includes('name="opening"'))
+
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:5:257)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/site-chat-first.test.ts:2:2494
+✖ opening/question alone creates one lead with explicitly unknown name and original provenance (8.574131ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  400 !== 201
+
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:6:281)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 400,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/site-chat-first.test.ts:2:3680
+✖ orders endpoint issues TTL immediately and retries reuse one link without extending expiry (16.796388ms)
+  AssertionError [ERR_ASSERTION]: expiresAt required at issuance
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:7:436)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/site-chat-first.test.ts:2:4955
+✖ issued link rejects another chat and expires at the recorded boundary (1.29838ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  400 !== 201
+
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:8:190)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 400,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/site-chat-first.test.ts:2:6118
+✖ empty opening and invalid source remain rejected; origin and storage guards unchanged (4.137467ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  400 !== 500
+
+      at TestContext.<anonymous> (/workspace/work/crm-inbox/song-system/tests/site-chat-first.test.ts:9:492)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 400,
+    expected: 500,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

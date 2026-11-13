@@ -1,0 +1,65 @@
+{
+  "viewport": {
+    "width": 360,
+    "height": 800
+  },
+  "scenarios": [
+    {
+      "path": "/",
+      "opening": "Скільки коштує пісня?",
+      "reply": "Хочу пісню для мами",
+      "sameOrder": true,
+      "openingPreserved": true,
+      "retryNoDuplicate": true,
+      "otherChatRejected": true,
+      "expiryRejected": true,
+      "recipient": "мами",
+      "occasion": "Вигаданий спогад: разом садили яблуню",
+      "sourcePage": null,
+      "leadCount": 1,
+      "webChoicePersisted": true,
+      "apiRetrySameOrder": true,
+      "whatsappManual": true,
+      "reloadSameChat": true
+    },
+    {
+      "path": "/pisnia-dlia-mamy",
+      "opening": "Хочу пісню для бабусі",
+      "reply": "Ні, для сестри",
+      "sameOrder": true,
+      "openingPreserved": true,
+      "retryNoDuplicate": true,
+      "otherChatRejected": true,
+      "expiryRejected": true,
+      "recipient": "сестри",
+      "occasion": "Вигаданий спогад: разом садили яблуню",
+      "sourcePage": "/pisnia-dlia-mamy",
+      "leadCount": 2,
+      "webChoicePersisted": true,
+      "apiRetrySameOrder": true,
+      "whatsappManual": true,
+      "reloadSameChat": true
+    },
+    {
+      "path": "/pisnia-na-den-narodzhennia",
+      "opening": "Хочу пісню для мами просто подякувати",
+      "reply": "Не на день народження. Хочу просто подякувати",
+      "sameOrder": true,
+      "openingPreserved": true,
+      "retryNoDuplicate": true,
+      "otherChatRejected": true,
+      "expiryRejected": true,
+      "recipient": "мами",
+      "occasion": "Подяка без приводу",
+      "sourcePage": "/pisnia-na-den-narodzhennia",
+      "leadCount": 3,
+      "webChoicePersisted": true,
+      "apiRetrySameOrder": true,
+      "whatsappManual": true,
+      "reloadSameChat": true
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "ok": true
+}

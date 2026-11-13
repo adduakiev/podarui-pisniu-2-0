@@ -1,0 +1,14 @@
+✔ chat-first form is independent of LOCAL_ONLY=0 (8.512183ms)
+✔ chat-first form is independent of LOCAL_ONLY=1 (1.020169ms)
+✔ opening/question alone creates one lead with explicitly unknown name and original provenance (23.276634ms)
+✔ orders endpoint issues TTL immediately and retries reuse one link without extending expiry (4.695779ms)
+✔ issued link rejects another chat and expires at the recorded boundary (7.668883ms)
+✔ empty opening and invalid source remain rejected; origin and storage guards unchanged (3.410288ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 590.455006
