@@ -1,3 +1,4 @@
+import {timeline,deliveryEventId} from './crm-records';
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
 import { z } from 'zod';
 import { contactPause } from './conversation';
@@ -81,6 +82,7 @@ async function record(accountId: string, senderId: string, inboundId: string, me
     const replies=result.suppressReply?[]:result.contactPaused?(before?.contactPaused?[]:result.messages.filter((_item,index)=>index===result.pauseAcknowledgementIndex)):result.messages.slice(before?.orderId===result.orderId?before.messages.length:0);
     const text=replies.filter(item=>item.role==='assistant').map(item=>item.text).join('\n\n');
     database.prepare('UPDATE instagram_inbound SET reply=? WHERE accountId=? AND inboundId=?').run(text||null,accountId,inboundId);
+    if(text)timeline(database,{id:deliveryEventId('instagram',JSON.stringify([accountId,inboundId,'message'])),orderId:result.orderId,channel:'instagram',direction:'outbound',text,status:'pending',jobId:JSON.stringify(['instagram',JSON.stringify([accountId,inboundId,'message'])])});
     return {text,claim:result.deliveryClaim,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
   })();
 }
@@ -124,15 +126,17 @@ export function createInstagramWebhook(deps: Dependencies) {
         const pause=contactPause(reply.orderId);
         if(pause.paused&&(reply.pauseAcknowledgementIndex===undefined||reply.pauseAcknowledgementIndex!==pause.acknowledgementIndex)){suppressJob('instagram',eventId,reply.claim);continue;}
         const text=reply.text;
+        const log=(status:string)=>timeline(db(),{id:deliveryEventId('instagram',eventId),orderId:reply.orderId,channel:'instagram',direction:'outbound',text,status,jobId:JSON.stringify(['instagram',eventId])});
         if(!beginDelivery('instagram',eventId,reply.claim))continue;
+        log('sending');
         try {
           await deps.send({ accountId: entry.id, senderId: sender.id, inboundId: message.mid, text });
         } catch {
-          endDelivery('instagram',eventId,reply.claim,true);
+          endDelivery('instagram',eventId,reply.claim,true);log('uncertain');
           // Keep the prepared reply for review. A webhook retry must not send it twice.
           continue;
         }
-        endDelivery('instagram',eventId,reply.claim,false);
+        endDelivery('instagram',eventId,reply.claim,false);log('sent');
         db().prepare('UPDATE instagram_inbound SET sentAt=? WHERE accountId=? AND inboundId=?')
           .run(new Date().toISOString(), entry.id, message.mid);
       }

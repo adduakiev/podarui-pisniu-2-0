@@ -1,0 +1,24 @@
+// Run only with local built app and a fresh synthetic DB; all external requests blocked.
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'/opt/codex/cua_node/lib/node_modules/playwright');
+const {execFileSync}=require('node:child_process'),fs=require('node:fs'),assert=require('node:assert/strict');
+const base=process.env.QA_BASE||'http://127.0.0.1:3124',data=process.env.QA_DATA,evidence=process.env.QA_EVIDENCE;
+if(!data||!evidence)throw Error('QA_DATA and QA_EVIDENCE required');
+const result={viewport:{width:390,height:844},externalRequests:[],pageErrors:[]};
+(async()=>{const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+async function context(){const c=await browser.newContext({viewport:result.viewport,isMobile:true,hasTouch:true});c.setDefaultTimeout(15000);await c.route('**/*',r=>{if(new URL(r.request().url()).origin===base)return r.continue();result.externalRequests.push(r.request().url());return r.abort()});c.on('page',p=>p.on('pageerror',e=>result.pageErrors.push(e.message)));return c}
+try{const customer=await(await context()).newPage();await customer.goto(base);
+ const opening='Хочу пісню для мами.\nEmail: first@example.test; телефон: +380501234567';
+ const unsafe='<img src=x onerror="window.__contactXSS=1">';
+ await customer.getByLabel('З чого почнемо?',{exact:true}).fill(opening);await customer.getByText('Додати контакт або обрати формат',{exact:true}).click();await customer.getByLabel('Контакт (необов’язково)',{exact:true}).fill(unsafe);await customer.locator('.public-order-form input[type=checkbox]').check();const created=customer.waitForResponse(r=>r.url()===base+'/api/orders'&&r.request().method()==='POST');await customer.getByRole('button',{name:'Почати розмову',exact:true}).click();const id=(await(await created).json()).id;assert.ok(id);await customer.getByLabel('Ваша відповідь',{exact:true}).waitFor();
+ await customer.getByLabel('Ваша відповідь',{exact:true}).fill('Email: second@example.test');const saved=customer.waitForResponse(r=>r.url().includes('/api/conversation')&&r.request().method()==='POST');await customer.getByRole('button',{name:'Надіслати відповідь ↗',exact:true}).click();assert.equal((await saved).status(),200);
+ const output=execFileSync(process.execPath,['--import','tsx','tests/fixtures/inbox-channels.mts'],{encoding:'utf8',env:{PATH:process.env.PATH,LOCAL_ONLY:'1',DATA_DIR:data,SESSION_SECRET:'synthetic-only-session-secret-for-offline-qa',OLENA_RESPONSES_ENABLED:'0',QA_ORDER:id}});const {directId}=JSON.parse(output.trim());
+ result.clientDenied=await customer.evaluate(async id=>(await fetch('/api/inbox?id='+id)).status,id);assert.equal(result.clientDenied,403);
+ const admin=await(await context()).newPage();await admin.goto(base+'/admin');await admin.locator('input[name=password]').fill('synthetic-only-password');await admin.getByRole('button',{name:'Увійти →',exact:true}).click();await admin.getByRole('link',{name:'Вхідні повідомлення',exact:true}).click();
+ async function select(id){await admin.getByLabel('Замовлення',{exact:true}).selectOption(id);await admin.getByRole('heading',{name:'Усі контакти',exact:true}).waitFor()}
+ await select(id);const text=await admin.locator('main').innerText();for(const value of [unsafe,'first@example.test','second@example.test','+380501234567','@synthetic_inbox','uncertain'])assert.ok(text.includes(value),value);assert.equal(await admin.locator('main img').count(),0);assert.equal(await admin.evaluate(()=>window.__contactXSS),undefined);
+ result.contactsEscaped=true;result.allContactsVisible=true;result.telegramUncertainVisible=true;
+ await admin.getByRole('button',{name:'Взяти розмову',exact:true}).click();await admin.getByText('Режим: Власник / продюсер',{exact:true}).waitFor();await admin.getByRole('button',{name:'Повернути Олені',exact:true}).click();await admin.getByText('Режим: Олена',{exact:true}).waitFor();result.takeoverResume=true;
+ await admin.screenshot({path:evidence+'/inbox-mobile.png',fullPage:true});await admin.reload();await select(id);assert.ok((await admin.locator('main').innerText()).includes('second@example.test'));result.reload=true;
+ await select(directId);const direct=await admin.locator('main').innerText();assert.ok(direct.includes('direct@example.test'));assert.ok(direct.includes('sent'));assert.ok(!direct.includes('second@example.test'));result.directSentAndIsolation=true;
+ result.horizontalOverflow=await admin.evaluate(()=>document.documentElement.scrollWidth>innerWidth);assert.equal(result.horizontalOverflow,false);assert.deepEqual(result.pageErrors,[]);assert.deepEqual(result.externalRequests,[]);result.ok=true;
+}catch(e){result.ok=false;result.error=String(e);throw e}finally{fs.writeFileSync(evidence+'/inbox-mobile.json',JSON.stringify(result,null,2));await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

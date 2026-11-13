@@ -1,3 +1,4 @@
+import {timeline,deliveryEventId} from './crm-records';
 import {randomUUID} from 'node:crypto';
 import {claimJob,claimCurrent,finishJob,readJob,writeJob,jobsDb,jobId,importLegacyJobs,type JobInput} from './inbound-jobs';
 import {db} from './db';
@@ -33,6 +34,7 @@ export async function processInbound(input:Inbound,interpreter?:Interpreter,reco
   const result:Awaited<ReturnType<typeof olenaDialogue>>&{suppressReply?:boolean}=recovery&&owned.result?owned.result:await olenaDialogue(input.orderId,input.message,!!input.confirm,interpreter,input.channel+':'+eventId,{revision:owned.revision,current:()=>claimCurrent(owned.id,owned.token)});
   const response={...result,suppressReply:'stale' in result&&!!result.stale,deliveryRevision:result.deliveryRevision};
   database.transaction(()=>{finishJob(owned.id,owned.token,response,!!recovery);database.prepare("UPDATE dialogue_inbound SET state='done',result=? WHERE channel=? AND eventId=?").run(JSON.stringify(response),input.channel,eventId);})();
+  if(input.channel==='site'&&!response.suppressReply){const message=response.messages.at(-1);if(message?.role==='assistant')timeline(database,{id:deliveryEventId('site',eventId),orderId:response.orderId,channel:'site',direction:'outbound',text:message.text,status:'response_prepared',jobId:owned.id});}
   return {...response,deliveryClaim:owned.token};
  }catch(error){if(claim&&claimCurrent(claim.id,claim.token)){database.prepare("UPDATE dialogue_inbound SET state='failed' WHERE channel=? AND eventId=?").run(input.channel,eventId);const j=readJob(claim.id)!;j.error='Processing failed; owner reconciliation required';j.leaseUntil=0;writeJob(j);}throw error;}
 }

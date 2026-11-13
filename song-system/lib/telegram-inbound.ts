@@ -1,3 +1,4 @@
+import {timeline,deliveryEventId} from './crm-records';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { activeOrderId, contactPause } from './conversation';
@@ -34,6 +35,7 @@ function table() {
 }
 
 function save(updateId: number, delivery: Delivery) {
+  for(const [index,item] of delivery.outbound.entries())if(item.orderId&&item.method==='sendMessage')timeline(db(),{id:deliveryEventId('telegram',String(updateId),index),orderId:item.orderId,channel:'telegram',direction:'outbound',text:String(item.payload.text),status:item.state,jobId:jobId('telegram',String(updateId))});
   const prior=table().prepare('SELECT body FROM telegram_deliveries WHERE updateId=?').get(updateId) as {body:string}|undefined;
   if(prior&&delivery.inbound===undefined)delivery.inbound=JSON.parse(prior.body).inbound;
   table().prepare('INSERT OR REPLACE INTO telegram_deliveries VALUES(?,?)')

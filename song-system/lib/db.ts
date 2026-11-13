@@ -1,3 +1,4 @@
+import {captureForm,orderContacts} from './crm-records';
 import { DatabaseSync } from 'node:sqlite';
 class LocalDatabase extends DatabaseSync {
  transaction<T>(fn:()=>T){
@@ -31,13 +32,14 @@ export function db(){
  `)}return instance;
 }
 function withTermsAndTask(o:Order):Order{
+ o.contacts=orderContacts(db(),o);
  o.payment_terms??=defaultPaymentTerms(o.amount);
  const task=db().prepare("SELECT body FROM lyrics_tasks WHERE orderId=? AND purpose='lyrics' AND version=1").get(o.id) as {body:string}|undefined;
  if(task)o.lyricsTask=JSON.parse(task.body);
  return o;
 }
 export function listOrders():Order[]{return db().prepare('SELECT body FROM orders ORDER BY rowid DESC').all().map((r:any)=>{const o=JSON.parse(r.body);o.paid=(db().prepare('SELECT COALESCE(SUM(amount),0) total FROM payments WHERE orderId=?').get(o.id) as any).total;return withTermsAndTask(o)})}
-export function createOrder(input:unknown,source?:Order['source']){const p=orderSchema.parse(input);return db().transaction(()=>{const old=db().prepare('SELECT body FROM orders WHERE requestId=?').get(p.requestId) as any;if(old)return JSON.parse(old.body).id;const id=randomUUID();const defaults=p.source_page?landingDefaults[p.source_page]:undefined;const provisional=defaults?Object.fromEntries(Object.entries(defaults).filter(([key,value])=>p[key as 'recipient'|'occasion']===value)):undefined;const o={...p,landing_defaults:provisional,source,id,createdAt:new Date().toISOString(),status:'Нове звернення',notes:'',nextAction:'Зв’язатися та уточнити історію',briefAt:null,dueAt:null,revision:0,paymentLink:'',amount:plans[p.plan],payment_terms:defaultPaymentTerms(plans[p.plan]),paid:0};db().prepare('INSERT INTO orders VALUES(?,?,?)').run(id,p.requestId,JSON.stringify(o));return id})()}
+export function createOrder(input:unknown,source?:Order['source']){const p=orderSchema.parse(input);return db().transaction(()=>{const old=db().prepare('SELECT body FROM orders WHERE requestId=?').get(p.requestId) as any;if(old)return JSON.parse(old.body).id;const id=randomUUID();const defaults=p.source_page?landingDefaults[p.source_page]:undefined;const provisional=defaults?Object.fromEntries(Object.entries(defaults).filter(([key,value])=>p[key as 'recipient'|'occasion']===value)):undefined;const {contacts:suppliedContacts,...fields}=p;const o={...fields,landing_defaults:provisional,source,id,createdAt:new Date().toISOString(),status:'Нове звернення',notes:'',nextAction:'Зв’язатися та уточнити історію',briefAt:null,dueAt:null,revision:0,paymentLink:'',amount:plans[p.plan],payment_terms:defaultPaymentTerms(plans[p.plan]),paid:0};db().prepare('INSERT INTO orders VALUES(?,?,?)').run(id,p.requestId,JSON.stringify(o));captureForm(db(),o,suppliedContacts);return id})()}
 // actor is supplied only by the authenticated owner route, never parsed from JSON.
 export function updateOrder(input:unknown,actor?:{role:'owner';name:string}){
  const p=updateSchema.parse(input);

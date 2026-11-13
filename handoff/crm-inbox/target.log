@@ -1,0 +1,18 @@
+✔ multiple structured/form/message contacts accumulate without overwriting original fields (65.745925ms)
+✔ same value new source appends provenance; same-name leads never merge (13.45879ms)
+✔ uncertain, third-party mentions, bare nick and Telegram ID are not verified contacts (14.0095ms)
+✔ request retry cannot overwrite contacts; structured invalid or spoofed evidence rejected (2.533403ms)
+✔ legacy contact remains available and unconfirmed after a new contact is supplied (7.129326ms)
+✔ owner-only inbox rejects a client token even for its own or another order (33.926738ms)
+✔ takeover guards all linked channels; resume preserves no-contact and revision checks (37.312397ms)
+✔ site Telegram binding retains one order and real fake-transport states (18.485173ms)
+✔ Direct history captures inbound and sent receipt without inventing phone from sender ID (20.480041ms)
+✔ local-only persistence guard stays enforced (0.355539ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 470.584808

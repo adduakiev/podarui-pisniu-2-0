@@ -1,0 +1,17 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "externalRequests": [],
+  "pageErrors": [],
+  "clientDenied": 403,
+  "contactsEscaped": true,
+  "allContactsVisible": true,
+  "telegramUncertainVisible": true,
+  "takeoverResume": true,
+  "reload": true,
+  "directSentAndIsolation": true,
+  "horizontalOverflow": false,
+  "ok": true
+}

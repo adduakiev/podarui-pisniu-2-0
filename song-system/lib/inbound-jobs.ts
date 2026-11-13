@@ -1,3 +1,4 @@
+import {captureInbound} from './crm-records';
 import {randomUUID} from 'node:crypto';
 import {db} from './db';
 import {dialogueContext} from './conversation';
@@ -12,7 +13,7 @@ export function ensureInboundJob(input:JobInput){return jobsDb().transaction(()=
  const normalized={orderId:input.orderId,channel:input.channel,eventId:input.eventId,message:input.message,confirm:!!input.confirm};
  const id=jobId(input.channel,input.eventId),old=readJob(id);
  if(old){if(JSON.stringify(old.input)!==JSON.stringify(normalized))throw Error('INBOUND_ID_REUSED');return old;}
- const j:Job={id,input:normalized,state:'pending',revision:dialogueContext(input.orderId).revision,token:'',leaseUntil:0,attempts:0,history:[]};writeJob(j);return j;
+ const j:Job={id,input:normalized,state:'pending',revision:dialogueContext(input.orderId).revision,token:'',leaseUntil:0,attempts:0,history:[]};writeJob(j);captureInbound(jobsDb(),input);return j;
 })();}
 export function claimJob(input:JobInput,recovery?:{actor:string;reason:string;commandId:string}){return jobsDb().transaction(()=>{
  const j=ensureInboundJob(input);
