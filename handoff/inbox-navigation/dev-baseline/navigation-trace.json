@@ -1,0 +1,2127 @@
+[
+  {
+    "at": 1794591812159,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591812171,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/",
+    "method": "GET",
+    "resource": "document",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814686,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/",
+    "status": 200
+  },
+  {
+    "at": 1794591814690,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591814691,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/"
+  },
+  {
+    "at": 1794591814706,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/image",
+    "method": "GET",
+    "resource": "image",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814735,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814736,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814736,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814736,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814741,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814741,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814742,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814743,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814744,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814744,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814745,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814747,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_219uq1s._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814748,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814748,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0s0loll._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814749,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_0-9dje8._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591814828,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "status": 200
+  },
+  {
+    "at": 1794591814834,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591814984,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/image",
+    "status": 200
+  },
+  {
+    "at": 1794591814993,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591814994,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591814996,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591814996,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815000,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815000,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815000,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_219uq1s._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815001,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815002,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815002,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0s0loll._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815002,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815002,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815003,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_0-9dje8._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815052,
+    "kind": "console",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+  },
+  {
+    "at": 1794591815118,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591815143,
+    "kind": "console",
+    "type": "log",
+    "text": "[HMR] connected"
+  },
+  {
+    "at": 1794591815152,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591815197,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591815213,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591815236,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591815294,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/"
+  },
+  {
+    "at": 1794591817302,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421.9599914550781
+  },
+  {
+    "at": 1794591817306,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421.9599914550781
+  },
+  {
+    "at": 1794591817306,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421
+  },
+  {
+    "at": 1794591817730,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262.0299987792969
+  },
+  {
+    "at": 1794591817732,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262.0299987792969
+  },
+  {
+    "at": 1794591817732,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262
+  },
+  {
+    "at": 1794591817779,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338.6499938964844
+  },
+  {
+    "at": 1794591817781,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338.6499938964844
+  },
+  {
+    "at": 1794591817782,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338
+  },
+  {
+    "at": 1794591817783,
+    "kind": "dom",
+    "type": "submit",
+    "path": "/",
+    "target": "FORM",
+    "formAction": null,
+    "submitter": "Почати розмову",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591817806,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/orders",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591818022,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] rebuilding"
+  },
+  {
+    "at": 1794591818145,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/__nextjs_font/geist-latin.woff2",
+    "method": "GET",
+    "resource": "font",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591818156,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/__nextjs_font/geist-latin.woff2",
+    "status": 200
+  },
+  {
+    "at": 1794591818534,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/orders",
+    "status": 201
+  },
+  {
+    "at": 1794591818538,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] done in 608ms"
+  },
+  {
+    "at": 1794591818577,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591818578,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591818792,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] rebuilding"
+  },
+  {
+    "at": 1794591818821,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "status": 200
+  },
+  {
+    "at": 1794591818831,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "status": 200
+  },
+  {
+    "at": 1794591818833,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] done in 139ms"
+  },
+  {
+    "at": 1794591819800,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159.86000061035156,
+    "y": 150.00999450683594
+  },
+  {
+    "at": 1794591819800,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159.86000061035156,
+    "y": 150.00999450683594
+  },
+  {
+    "at": 1794591819801,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159,
+    "y": 150
+  },
+  {
+    "at": 1794591819807,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591819836,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/conversation",
+    "status": 200
+  },
+  {
+    "at": 1794591820398,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591820553,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 403
+  },
+  {
+    "at": 1794591820553,
+    "kind": "console",
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "at": 1794591820690,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591820692,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/admin",
+    "method": "GET",
+    "resource": "document",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591820907,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] rebuilding"
+  },
+  {
+    "at": 1794591821826,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/admin",
+    "status": 200
+  },
+  {
+    "at": 1794591821831,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591821832,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin"
+  },
+  {
+    "at": 1794591821841,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] done in 1031ms"
+  },
+  {
+    "at": 1794591821846,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821847,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821851,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821852,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821853,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821856,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821857,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821857,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821857,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1fav_h-._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_161jh--._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821858,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_classic_0qgufeu._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821859,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_core_15b2lfp._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821859,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_locales_1-ided7._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821859,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react_0qox21c._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591821864,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "status": 200
+  },
+  {
+    "at": 1794591821965,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821968,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821969,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821969,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821970,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821970,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1fav_h-._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_161jh--._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821971,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react_0qox21c._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_classic_0qgufeu._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_locales_1-ided7._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_zod_v4_core_15b2lfp._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591821976,
+    "kind": "console",
+    "type": "verbose",
+    "text": "[DOM] Password forms should have (optionally hidden) username fields for accessibility: (More info: https://goo.gl/9p2vKq) %o"
+  },
+  {
+    "at": 1794591822015,
+    "kind": "console",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+  },
+  {
+    "at": 1794591822076,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591822097,
+    "kind": "console",
+    "type": "log",
+    "text": "[HMR] connected"
+  },
+  {
+    "at": 1794591822098,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591822111,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591822147,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591822162,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591822208,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin"
+  },
+  {
+    "at": 1794591822249,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439.7799987792969
+  },
+  {
+    "at": 1794591822251,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439.7799987792969
+  },
+  {
+    "at": 1794591822252,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439
+  },
+  {
+    "at": 1794591822252,
+    "kind": "dom",
+    "type": "submit",
+    "path": "/admin",
+    "target": "FORM",
+    "formAction": null,
+    "submitter": "Увійти →",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591822259,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/session",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591822378,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/session",
+    "status": 200
+  },
+  {
+    "at": 1794591822380,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/orders",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591822381,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/media",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591822398,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/orders",
+    "status": 200
+  },
+  {
+    "at": 1794591822537,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/media",
+    "status": 200
+  },
+  {
+    "at": 1794591822618,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750.8099975585938
+  },
+  {
+    "at": 1794591822619,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750.8099975585938
+  },
+  {
+    "at": 1794591822619,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750
+  },
+  {
+    "at": 1794591822671,
+    "kind": "pre-inbox",
+    "url": "http://127.0.0.1:3141/admin",
+    "cookies": [
+      {
+        "name": "admin_session",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "expires": 1794620622.374359,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Strict"
+      }
+    ],
+    "link": {
+      "html": "<a href=\"/admin/inbox\">Вхідні повідомлення</a>"
+    }
+  },
+  {
+    "at": 1794591822783,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254.22999572753906,
+    "y": 187
+  },
+  {
+    "at": 1794591822784,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254.22999572753906,
+    "y": 187
+  },
+  {
+    "at": 1794591822784,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254,
+    "y": 187
+  },
+  {
+    "at": 1794591822784,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591822789,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/admin/inbox",
+    "method": "GET",
+    "resource": "document",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591822996,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] rebuilding"
+  },
+  {
+    "at": 1794591822996,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] rebuilding"
+  },
+  {
+    "at": 1794591823035,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/admin/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823042,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591823044,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin/inbox"
+  },
+  {
+    "at": 1794591823055,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823060,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823061,
+    "kind": "console",
+    "type": "log",
+    "text": "[Fast Refresh] done in 163ms"
+  },
+  {
+    "at": 1794591823061,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823061,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823062,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823062,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823062,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823063,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823064,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823065,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823066,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823068,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0u1m-8_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823069,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823071,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1c2lx2y._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823087,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "status": 200
+  },
+  {
+    "at": 1794591823087,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823106,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823106,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823112,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823121,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823125,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823134,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0u1m-8_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823138,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823143,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823149,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1c2lx2y._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823150,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823155,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823160,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823163,
+    "kind": "console",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+  },
+  {
+    "at": 1794591823171,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823178,
+    "kind": "console",
+    "type": "log",
+    "text": "[HMR] connected"
+  },
+  {
+    "at": 1794591823187,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823202,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591823205,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin/inbox"
+  },
+  {
+    "at": 1794591823214,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823214,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823215,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823242,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823242,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591823245,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823257,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823279,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823331,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118.19000244140625,
+    "y": 492.7799987792969
+  },
+  {
+    "at": 1794591823332,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118.19000244140625,
+    "y": 492.7799987792969
+  },
+  {
+    "at": 1794591823332,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118,
+    "y": 492
+  },
+  {
+    "at": 1794591823345,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/conversation-control",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823497,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/conversation-control",
+    "status": 200
+  },
+  {
+    "at": 1794591823497,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823509,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823579,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127.47000122070312,
+    "y": 534.780029296875
+  },
+  {
+    "at": 1794591823582,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127.47000122070312,
+    "y": 534.780029296875
+  },
+  {
+    "at": 1794591823582,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127,
+    "y": 534
+  },
+  {
+    "at": 1794591823591,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/conversation-control",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3141",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823608,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/conversation-control",
+    "status": 200
+  },
+  {
+    "at": 1794591823609,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823620,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823738,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591823740,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/admin/inbox",
+    "method": "GET",
+    "resource": "document",
+    "referer": "http://127.0.0.1:3141/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823780,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/admin/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823783,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591823785,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin/inbox"
+  },
+  {
+    "at": 1794591823795,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823799,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823799,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823800,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823800,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823800,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823801,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823801,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823801,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823802,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823802,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823802,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0u1m-8_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823804,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823804,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1c2lx2y._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823806,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/app_globals_0yg4wg8.css",
+    "status": 200
+  },
+  {
+    "at": 1794591823828,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1di75ot._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823838,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823839,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_1amofcm._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823855,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1anvha4._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823855,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_%40swc_helpers_cjs_1r9vbqw._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823855,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823875,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/turbopack-_08bm286._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823877,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_0u1m-8_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823882,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_20wefz_._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823887,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_next-devtools_index_090k2jm.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823889,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/_1c2lx2y._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823889,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_client_0_90u2t._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823891,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823896,
+    "kind": "console",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+  },
+  {
+    "at": 1794591823902,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823909,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_1mojsay._.js",
+    "status": 200
+  },
+  {
+    "at": 1794591823910,
+    "kind": "console",
+    "type": "log",
+    "text": "[HMR] connected"
+  },
+  {
+    "at": 1794591823914,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591823938,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3141/admin/inbox"
+  },
+  {
+    "at": 1794591823941,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823946,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823947,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823956,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591823967,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823974,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591823984,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591823995,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591824021,
+    "kind": "request",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3141/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591824032,
+    "kind": "response",
+    "url": "http://127.0.0.1:3141/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591824050,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591824083,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  }
+]

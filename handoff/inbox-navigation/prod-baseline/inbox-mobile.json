@@ -1,0 +1,109 @@
+{
+  "stages": [
+    "public-form",
+    "login",
+    "crm-order-selection",
+    "inbox",
+    "takeover-resume",
+    "reload",
+    "direct-order-selection"
+  ],
+  "http": [
+    {
+      "path": "/api/orders",
+      "status": 201,
+      "method": "POST"
+    },
+    {
+      "path": "/api/conversation",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/conversation",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 403,
+      "method": "GET"
+    },
+    {
+      "path": "/api/session",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/orders",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/media",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/conversation-control",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/conversation-control",
+      "status": 200,
+      "method": "POST"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    },
+    {
+      "path": "/api/inbox",
+      "status": 200,
+      "method": "GET"
+    }
+  ],
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "externalRequests": [],
+  "pageErrors": [],
+  "clientDenied": 403,
+  "contactsEscaped": true,
+  "allContactsVisible": true,
+  "telegramUncertainVisible": true,
+  "takeoverResume": true,
+  "reload": true,
+  "directSentAndIsolation": true,
+  "horizontalOverflow": false,
+  "ok": true,
+  "videos": []
+}

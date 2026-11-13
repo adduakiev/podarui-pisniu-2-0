@@ -1,0 +1,1372 @@
+[
+  {
+    "at": 1794591742984,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591742989,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/",
+    "method": "GET",
+    "resource": "document",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743211,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/",
+    "status": 200
+  },
+  {
+    "at": 1794591743214,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591743222,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/"
+  },
+  {
+    "at": 1794591743228,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/image",
+    "method": "GET",
+    "resource": "image",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743229,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743238,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743241,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743241,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743242,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743243,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743243,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3i8klye32kxep.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743281,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "status": 200
+  },
+  {
+    "at": 1794591743427,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/image",
+    "status": 200
+  },
+  {
+    "at": 1794591743438,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743439,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743439,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743439,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743439,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3i8klye32kxep.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743439,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "status": 200
+  },
+  {
+    "at": 1794591743525,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591743534,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591743547,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/"
+  },
+  {
+    "at": 1794591743571,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591745590,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421.9599914550781
+  },
+  {
+    "at": 1794591745596,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421.9599914550781
+  },
+  {
+    "at": 1794591745597,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "SUMMARY",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 421
+  },
+  {
+    "at": 1794591746035,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262.0299987792969
+  },
+  {
+    "at": 1794591746038,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262.0299987792969
+  },
+  {
+    "at": 1794591746039,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "INPUT",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 58,
+    "y": 262
+  },
+  {
+    "at": 1794591746100,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338.6499938964844
+  },
+  {
+    "at": 1794591746101,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338.6499938964844
+  },
+  {
+    "at": 1794591746102,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Почати розмову",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 338
+  },
+  {
+    "at": 1794591746104,
+    "kind": "dom",
+    "type": "submit",
+    "path": "/",
+    "target": "FORM",
+    "formAction": null,
+    "submitter": "Почати розмову",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591746133,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/orders",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591746230,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/orders",
+    "status": 201
+  },
+  {
+    "at": 1794591746253,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/conversation",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591746310,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/conversation",
+    "status": 200
+  },
+  {
+    "at": 1794591747277,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159.86000061035156,
+    "y": 150.00999450683594
+  },
+  {
+    "at": 1794591747279,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159.86000061035156,
+    "y": 150.00999450683594
+  },
+  {
+    "at": 1794591747280,
+    "kind": "dom",
+    "type": "click",
+    "path": "/",
+    "target": "BUTTON",
+    "text": "Надіслати відповідь ↗",
+    "buttonType": "button",
+    "defaultPrevented": false,
+    "x": 159,
+    "y": 150
+  },
+  {
+    "at": 1794591747284,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/conversation",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591747351,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/conversation",
+    "status": 200
+  },
+  {
+    "at": 1794591748017,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748031,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 403
+  },
+  {
+    "at": 1794591748031,
+    "kind": "console",
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "at": 1794591748220,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748224,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/admin",
+    "method": "GET",
+    "resource": "document",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748342,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/admin",
+    "status": 200
+  },
+  {
+    "at": 1794591748345,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "blank",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748346,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin"
+  },
+  {
+    "at": 1794591748357,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748358,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748360,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748361,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748362,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748363,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748364,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/22cwasdq0mp43.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748381,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "status": 200
+  },
+  {
+    "at": 1794591748386,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748432,
+    "kind": "console",
+    "type": "verbose",
+    "text": "[DOM] Password forms should have (optionally hidden) username fields for accessibility: (More info: https://goo.gl/9p2vKq) %o"
+  },
+  {
+    "at": 1794591748440,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748441,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748441,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748441,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748494,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/22cwasdq0mp43.js",
+    "status": 200
+  },
+  {
+    "at": 1794591748557,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748560,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin"
+  },
+  {
+    "at": 1794591748566,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748577,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591748635,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439.7799987792969
+  },
+  {
+    "at": 1794591748636,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439.7799987792969
+  },
+  {
+    "at": 1794591748637,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Увійти →",
+    "buttonType": "submit",
+    "formAction": null,
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 439
+  },
+  {
+    "at": 1794591748638,
+    "kind": "dom",
+    "type": "submit",
+    "path": "/admin",
+    "target": "FORM",
+    "formAction": null,
+    "submitter": "Увійти →",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748641,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/session",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": []
+  },
+  {
+    "at": 1794591748656,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/session",
+    "status": 200
+  },
+  {
+    "at": 1794591748658,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/orders",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591748658,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/media",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591748672,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/orders",
+    "status": 200
+  },
+  {
+    "at": 1794591748681,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/media",
+    "status": 200
+  },
+  {
+    "at": 1794591748749,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750.8099975585938
+  },
+  {
+    "at": 1794591748750,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750.8099975585938
+  },
+  {
+    "at": 1794591748750,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "BUTTON",
+    "text": "Гістьмами · Email: second@example.testЗбір інформаціїБриф ще не повний0 грн / 2 000 грн→",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 195,
+    "y": 750
+  },
+  {
+    "at": 1794591748814,
+    "kind": "pre-inbox",
+    "url": "http://127.0.0.1:3140/admin",
+    "cookies": [
+      {
+        "name": "admin_session",
+        "domain": "127.0.0.1",
+        "path": "/",
+        "expires": 1794620548.653281,
+        "httpOnly": true,
+        "secure": false,
+        "sameSite": "Strict"
+      }
+    ],
+    "link": {
+      "html": "<a href=\"/admin/inbox\">Вхідні повідомлення</a>"
+    }
+  },
+  {
+    "at": 1794591748952,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254.22999572753906,
+    "y": 187
+  },
+  {
+    "at": 1794591748952,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254.22999572753906,
+    "y": 187
+  },
+  {
+    "at": 1794591748952,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin",
+    "target": "A",
+    "text": "Вхідні повідомлення",
+    "href": "/admin/inbox",
+    "defaultPrevented": false,
+    "x": 254,
+    "y": 187
+  },
+  {
+    "at": 1794591748953,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748957,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/admin/inbox",
+    "method": "GET",
+    "resource": "document",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591748972,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/admin/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591748975,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591748979,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin/inbox"
+  },
+  {
+    "at": 1794591748998,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591748999,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749000,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749000,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749000,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749001,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749002,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/17ka52jyf_hd0.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749018,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "status": 200
+  },
+  {
+    "at": 1794591749022,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749023,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749023,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749032,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749033,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749035,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/17ka52jyf_hd0.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749042,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591749044,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin/inbox"
+  },
+  {
+    "at": 1794591749053,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749057,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749066,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749068,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591749077,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749093,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749134,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118.19000244140625,
+    "y": 492.7799987792969
+  },
+  {
+    "at": 1794591749135,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118.19000244140625,
+    "y": 492.7799987792969
+  },
+  {
+    "at": 1794591749135,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Взяти розмову",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 118,
+    "y": 492
+  },
+  {
+    "at": 1794591749139,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/conversation-control",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749150,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/conversation-control",
+    "status": 200
+  },
+  {
+    "at": 1794591749153,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749161,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749198,
+    "kind": "dom",
+    "type": "pointerdown",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127.47000122070312,
+    "y": 534.780029296875
+  },
+  {
+    "at": 1794591749199,
+    "kind": "dom",
+    "type": "pointerup",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127.47000122070312,
+    "y": 534.780029296875
+  },
+  {
+    "at": 1794591749200,
+    "kind": "dom",
+    "type": "click",
+    "path": "/admin/inbox",
+    "target": "BUTTON",
+    "text": "Повернути Олені",
+    "buttonType": "submit",
+    "defaultPrevented": false,
+    "x": 127,
+    "y": 534
+  },
+  {
+    "at": 1794591749202,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/conversation-control",
+    "method": "POST",
+    "resource": "fetch",
+    "origin": "http://127.0.0.1:3140",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749215,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/conversation-control",
+    "status": 200
+  },
+  {
+    "at": 1794591749216,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749225,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749362,
+    "kind": "dom",
+    "type": "beforeunload",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591749363,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/admin/inbox",
+    "method": "GET",
+    "resource": "document",
+    "referer": "http://127.0.0.1:3140/admin",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749375,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/admin/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749378,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591749380,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin/inbox"
+  },
+  {
+    "at": 1794591749387,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "method": "GET",
+    "resource": "stylesheet",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749388,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749388,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749389,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749390,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749390,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749390,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/17ka52jyf_hd0.js",
+    "method": "GET",
+    "resource": "script",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749402,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/39i4r4-x-w-q0.css",
+    "status": 200
+  },
+  {
+    "at": 1794591749414,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/turbopack-106_dz16twefw.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749414,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3fntmmi971322.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749415,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/12aruqaur5huj.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749416,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/2j-dcpuz6akpa.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749420,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/3g4px251sg85e.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749426,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/_next/static/chunks/17ka52jyf_hd0.js",
+    "status": 200
+  },
+  {
+    "at": 1794591749431,
+    "kind": "dom",
+    "type": "pageshow",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591749435,
+    "kind": "navigation",
+    "url": "http://127.0.0.1:3140/admin/inbox"
+  },
+  {
+    "at": 1794591749440,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749441,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "method": "GET",
+    "resource": "other",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749450,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749453,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/icon.png",
+    "status": 200
+  },
+  {
+    "at": 1794591749459,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749466,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749485,
+    "kind": "request",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "method": "GET",
+    "resource": "fetch",
+    "referer": "http://127.0.0.1:3140/admin/inbox",
+    "cookieNames": [
+      "admin_session"
+    ]
+  },
+  {
+    "at": 1794591749492,
+    "kind": "response",
+    "url": "http://127.0.0.1:3140/api/inbox",
+    "status": 200
+  },
+  {
+    "at": 1794591749504,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/",
+    "defaultPrevented": false
+  },
+  {
+    "at": 1794591749537,
+    "kind": "dom",
+    "type": "pagehide",
+    "path": "/admin/inbox",
+    "defaultPrevented": false
+  }
+]
