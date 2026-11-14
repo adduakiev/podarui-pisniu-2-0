@@ -161,7 +161,7 @@ export function dialogueContext(id:string,message?:string){
  id=activeOrderId(id);
  const {state,order}=load(id);
  const facts=Object.fromEntries(Object.entries({...state.answers,recipient:order.recipient}).filter(([key])=>state.facts?.[key]?.status!=='unconfirmed'));
- return {capabilities:dialogueCapabilities,orderId:id,status:order.status,contactPaused:!!order.contactPaused,completed:order.status==='Завершено',revision:order.revision,mode:state.mode,messages:state.messages.map(({role,text})=>({role,text})),facts,factMetadata:state.facts||{},avoidanceSources:state.avoidRestrictions||[],message:message??(state.messages.length===1?order.opening||'':'')};
+ return {capabilities:dialogueCapabilities,orderId:id,status:order.status,contactPaused:!!order.contactPaused,completed:order.status==='Завершено',revision:order.revision,mode:state.mode,ownerReferences:state.messages.flatMap((m,index)=>m.feedback?[{source_message_id:index,replacement:m.feedback.replacement,reason:m.feedback.reason}]:[]),messages:state.messages.map(({role,text})=>({role,text})),facts,factMetadata:state.facts||{},avoidanceSources:state.avoidRestrictions||[],message:message??(state.messages.length===1?order.opening||'':'')};
 }
 function conversationTurn(id:string,message?:string,confirm=false,interpreted?:{revision:number;proposal:Interpretation},stale=false){return db().transaction(()=>{
  const {order,state}=load(id);if(readiness(state,order)!=='confirmed')state.confirmed=false;
