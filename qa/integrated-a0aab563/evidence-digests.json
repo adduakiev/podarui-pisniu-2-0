@@ -1,0 +1,88 @@
+{
+  "sourceCommit": "a0aab5631bd403070d45b553683c349a8f7633bb",
+  "sourceTree": "57fa4442d3e2525dadab404c53cf867537fbb9c2",
+  "rawEvidenceUploaded": false,
+  "localEvidence": [
+    {
+      "name": "suite.log",
+      "sha256": "11563f7150bf0c7434b2b46fbd7d6b2e02a4618bee59570f7e641ec9739ca2c0",
+      "bytes": 13017
+    },
+    {
+      "name": "suite.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "build.log",
+      "sha256": "40db45308935c137e58c4fa9cedaf0b0f511a793c2c1087d56e357ed4c3856a0",
+      "bytes": 1107
+    },
+    {
+      "name": "build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "typecheck.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "site-mobile/mobile.json",
+      "sha256": "2d1ee6ef457dfcccc67bbf00d962ea28957578156081246a1ebaac3a44ba347b",
+      "bytes": 2335
+    },
+    {
+      "name": "site-mobile.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "inbox-mobile/inbox-mobile.json",
+      "sha256": "4219d6eeb8bfe51ed1b988fc5a42def8908cb97cafabe212b9873d52dfd1766a",
+      "bytes": 2210
+    },
+    {
+      "name": "inbox-mobile.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "direct-http.log",
+      "sha256": "5b32ae74bed3afa03ae65c09d55db42d368985e84b1cfdbb15d358aa17dc9688",
+      "bytes": 413
+    },
+    {
+      "name": "direct-http.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "site-tg-payment.log",
+      "sha256": "48b8b9bbf4e025f3d5d68bc32002cf9521f819b10600880e45ff29b57ea1b479",
+      "bytes": 2042
+    },
+    {
+      "name": "site-tg-payment.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "name": "turn-metadata.json",
+      "sha256": "845b2cd2a005cde76f4c291c91b379fc440827381440948483a0e00038fa9c1a",
+      "bytes": 8413
+    }
+  ],
+  "localZip": {
+    "filename": "release-candidate-a0-evidence.zip",
+    "uploaded": false,
+    "bytes": 1716026,
+    "sha256": "ce7bc57751b780797f8d392f79f1adae509fb486d1f76c08b23e4559cfc15a45"
+  }
+}

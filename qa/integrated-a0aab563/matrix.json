@@ -1,0 +1,103 @@
+{
+  "verdict": "SCOPED PASS — integrated LOCAL_ONLY release-candidate verification; not launch PASS",
+  "commit": "a0aab5631bd403070d45b553683c349a8f7633bb",
+  "tree": "57fa4442d3e2525dadab404c53cf867537fbb9c2",
+  "sourceChanged": false,
+  "worktreeClean": true,
+  "exitCodes": {
+    "typecheck": 0,
+    "site-mobile": 0,
+    "inbox-mobile": 0,
+    "suite": 0,
+    "build": 0,
+    "site-tg-payment": 0,
+    "direct-http": 0
+  },
+  "matrix": [
+    {
+      "scope": "Available suite: 144/144",
+      "status": "PASS",
+      "evidence": "suite.log; suite.exit"
+    },
+    {
+      "scope": "TypeScript and production build",
+      "status": "PASS",
+      "evidence": "typecheck.exit; build.exit"
+    },
+    {
+      "scope": "360px main + 2 landing; reload/retry; source/correction; web choice",
+      "status": "PASS",
+      "evidence": "site-mobile/mobile.json"
+    },
+    {
+      "scope": "Telegram pending/web approval, reject competitor, same context",
+      "status": "PASS",
+      "evidence": "site-mobile/mobile.json; site-tg-approval tests"
+    },
+    {
+      "scope": "Owner login → CRM/inbox → takeover/resume → reload; customer403/XSS/isolation",
+      "status": "PASS",
+      "evidence": "inbox-mobile/inbox-mobile.json; navigation-trace.json"
+    },
+    {
+      "scope": "Direct stay here → brief confirm → configured link → owner testpayment → one task/retry",
+      "status": "PASS",
+      "evidence": "direct-http.log"
+    },
+    {
+      "scope": "Site fallback HTTP → brief confirm → configured link → owner testpayment → one task/retry",
+      "status": "PASS",
+      "evidence": "site-tg-payment.log"
+    },
+    {
+      "scope": "Telegram injected/fake → callback confirm → configured link → owner HTTP payment → one task/retry",
+      "status": "PASS",
+      "evidence": "site-tg-payment.log"
+    },
+    {
+      "scope": "Owner-approved military deferral, policy priority, paid0 distinction",
+      "status": "PASS",
+      "evidence": "suite.log; payment-terms and policy-response tests; not separate HTTP deferral flow"
+    },
+    {
+      "scope": "Recovery/fencing, uncertain no blind resend, stop/revision/successor guards",
+      "status": "PASS",
+      "evidence": "suite.log; real process SIGKILL with artificially expired fixture leases"
+    },
+    {
+      "scope": "Instruction identity/provenance/retry and 3-channel metadata",
+      "status": "PASS",
+      "evidence": "suite.log; turn-metadata.json"
+    },
+    {
+      "scope": "Natural-time lease wait on this run",
+      "status": "NOT TESTED",
+      "evidence": "Artificial fixture expiry; no fresh 60-second wait"
+    },
+    {
+      "scope": "Live providers / durable cloud DB / actual LLM quality / owner acceptance",
+      "status": "NOT TESTED",
+      "evidence": "Separate gates; no launch acceptance"
+    },
+    {
+      "scope": "Google Fonts rendering / historical 858 suite",
+      "status": "NOT TESTED",
+      "evidence": "External requests blocked; historical suite unavailable"
+    }
+  ],
+  "findings": [],
+  "harnessCorrections": [
+    "Initial wrong-cwd invocation ran zero tests; excluded; correct run 144/144.",
+    "Custom site harness invalid source_page and token field corrected to actual API contract.",
+    "Custom site harness initially omitted UI initial opening conversation POST; preserved failed diagnostic and corrected harness only."
+  ],
+  "mode": "Site HTTP fallback disabled Responses; Telegram/Direct injected interpreter and fake transport; real localhost owner APIs, no real funds.",
+  "metadata": "olena-runtime-v1 / cc7f967dcb0933b2688c8c034e575796ce124600d4931882dabe5d545efe900e; not_invoked/null or injected/injected",
+  "limitations": [
+    "Configured owner HTTPS payment URL is not provider verification or real delivery.",
+    "Already-started transport cannot be cancelled; no provider exactly-once claim.",
+    "No live/model quality/cloud persistence/owner acceptance.",
+    "Only sanitized summary, matrix and digests are published. Raw local evidence and ZIP are not uploaded."
+  ],
+  "evidenceReferences": "Matrix evidence names identify local source evidence; raw logs, traces, screenshots and databases are intentionally not included."
+}
