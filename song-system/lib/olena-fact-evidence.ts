@@ -1,4 +1,5 @@
 import type {Interpretation} from './olena-interpreter';
+import {offeredContacts} from './crm-records';
 import {explicitDetails} from './olena-context';
 
 type Update = Interpretation['updates'][number];
@@ -51,7 +52,11 @@ export function supportedFactUpdate(update:Update,message:string,askedField?:str
   if(askedField==='recipient'&&tokens(briefAnswer).length===1&&canonical(briefAnswer)===canonical(value))return true;
   // Check the positive recipient clause, not merely an occurrence anywhere
   // in the message (the value may be negated or belong to another person).
-  const clauses=text.split(/[,;.!]/u).map(part=>part.trim());
+  // A contact-only line is independent of the recipient clause. Remove only
+  // wholly structured contact lines, then normalize together so a negation
+  // split across lines still applies. Mixed prose/contact lines stay intact.
+  const recipientText=normalize(message.split(/\r?\n/u).filter(line=>!line.split(/[;,]/u).every(part=>offeredContacts(part).length>0)).join(' '));
+  const clauses=recipientText.split(/[,;.!]/u).map(part=>part.trim());
   return clauses.some(clause=>{
    if(/(?:^|\s)не\s+(?:для|пісня)/u.test(clause))return false;
    const target=clause.match(/(?:^|\s)(?:для(?:\s+(?:моєї|нашої|своєї|мого|нашого|свого))?|подарувати|подякувати|отримувач\s*[—:-]?)\s+([\p{L}' -]+)/u)?.[1]
