@@ -1,3 +1,4 @@
+import {isBriefConfirmation} from './brief-confirmation';
 import {unsupportedDeliveryReply} from './olena-delivery-reply';
 import {mandatoryInstructionKind,mandatoryBrief,type MandatoryInstruction} from './olena-mandatory-brief';
 import {naturalEventDateCorrection,explicitEventDateWithdrawal} from './olena-date-correction';
@@ -170,6 +171,11 @@ function conversationTurn(id:string,message?:string,confirm=false,interpreted?:{
  const {order,state}=load(id);if(readiness(state,order)!=='confirmed')state.confirmed=false;
  if(!message&&!confirm&&state.messages.length===1&&order.opening)message=order.opening;
  const originalCount=state.messages.length;
+ // Preserve explicit channel consent as an inbound message without treating it
+ // as another brief fact. The existing confirmation gate below remains authoritative.
+ if(confirm&&message&&isBriefConfirmation(message)&&!stale&&!order.contactPaused&&state.mode==='assistant'&&state.reviewed&&['ready_for_review','confirmed'].includes(readiness(state,order))){
+  state.messages.push({role:'user',text:message});order.lastInboundAt=new Date().toISOString();message=undefined;
+ }
  const previousAssistant=state.messages.at(-1);
  const askedField=previousAssistant?.role==='assistant'?askedQuestionField(previousAssistant.text):undefined;
  const say=(text:string)=>state.messages.push({role:'assistant',text:state.tone==='memory'?text.replace(/[🤍🙂❤️]/gu,'').replace(/ +(?=\n|$)/g,''):text});

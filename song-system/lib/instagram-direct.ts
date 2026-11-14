@@ -1,7 +1,8 @@
+import {isBriefConfirmation} from './brief-confirmation';
 import {timeline,deliveryEventId} from './crm-records';
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
 import { z } from 'zod';
-import { contactPause } from './conversation';
+import { contactPause,dialogueSnapshot } from './conversation';
 import { createOrder, db } from './db';
 import {processInbound,deliveryCurrent} from './process-inbound';
 import {ensureInboundJob,beginDelivery,endDelivery,suppressJob,preparedCurrent} from './inbound-jobs';
@@ -69,18 +70,25 @@ async function record(accountId: string, senderId: string, inboundId: string, me
     }
     database.prepare('INSERT INTO instagram_inbound (accountId,inboundId,senderId) VALUES(?,?,?)').run(accountId,inboundId,senderId);
     database.prepare('INSERT INTO instagram_inbound_payloads VALUES(?,?,?,?,?)').run(accountId,inboundId,senderId,message,new Date().toISOString());
-    ensureInboundJob({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message});
-    return {orderId,fresh:!thread};
+    const before=thread?dialogueSnapshot(orderId):undefined;
+    const confirm=!!before&&(before.canConfirm||before.confirmed)&&isBriefConfirmation(message);
+    ensureInboundJob({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message,confirm});
+    return {orderId,before,confirm};
   })();
   if(!prepared)return;
-  const {orderId,fresh}=prepared;
-  const before=fresh?undefined:await processInbound({orderId,channel:'instagram',snapshot:true});
-  const result=await processInbound({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message},interpreter);
+  const {orderId,before,confirm}=prepared;
+  const result=await processInbound({orderId,channel:'instagram',eventId:JSON.stringify([accountId,inboundId,'message']),message,confirm},interpreter);
   return database.transaction(()=>{
     if(!preparedCurrent('instagram',JSON.stringify([accountId,inboundId,'message']),result.deliveryClaim))return {text:'',claim:result.deliveryClaim,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:undefined};
     if(result.orderId!==orderId)database.prepare('UPDATE instagram_threads SET orderId=? WHERE accountId=? AND senderId=?').run(result.orderId,accountId,senderId);
     const replies=result.suppressReply?[]:result.contactPaused?(before?.contactPaused?[]:result.messages.filter((_item,index)=>index===result.pauseAcknowledgementIndex)):result.messages.slice(before?.orderId===result.orderId?before.messages.length:0);
-    const text=replies.filter(item=>item.role==='assistant').map(item=>item.text).join('\n\n');
+    let text=replies.filter(item=>item.role==='assistant').map(item=>item.text).join('\n\n');
+    if(!result.suppressReply&&!result.contactPaused&&result.mode==='assistant'){
+      if(result.canConfirm&&text)text+='\n\nЩоб погодити цей бриф, напишіть «Підтверджую бриф». Якщо потрібно щось змінити — напишіть уточнення.';
+      // Only backend-approved configured HTTPS links, after brief confirmation.
+      // A new inbound may request it again; replay of the same event never sends twice.
+      if(result.confirmed&&/^https:\/\//i.test(result.paymentLink)&&(confirm||/оплат|реквізит|посилання/iu.test(message)))text+=(text?'\n\n':'')+'Погоджене платіжне посилання: '+result.paymentLink;
+    }
     database.prepare('UPDATE instagram_inbound SET reply=? WHERE accountId=? AND inboundId=?').run(text||null,accountId,inboundId);
     if(text)timeline(database,{id:deliveryEventId('instagram',JSON.stringify([accountId,inboundId,'message'])),orderId:result.orderId,channel:'instagram',direction:'outbound',text,status:'pending',jobId:JSON.stringify(['instagram',JSON.stringify([accountId,inboundId,'message'])])});
     return {text,claim:result.deliveryClaim,orderId:result.orderId,revision:result.deliveryRevision,pauseAcknowledgementIndex:result.contactPaused?result.pauseAcknowledgementIndex:undefined};
