@@ -55,7 +55,12 @@ export function supportedFactUpdate(update:Update,message:string,askedField?:str
   // A contact-only line is independent of the recipient clause. Remove only
   // wholly structured contact lines, then normalize together so a negation
   // split across lines still applies. Mixed prose/contact lines stay intact.
-  const recipientText=normalize(message.split(/\r?\n/u).filter(line=>!line.split(/[;,]/u).every(part=>offeredContacts(part).length>0)).join(' '));
+  const recipientText=normalize(message.split(/\r?\n/u).filter(line=>{
+   // Empty separator fragments are formatting, not non-contact prose.
+   // Require at least one real fragment; keep every mixed/ambiguous line intact.
+   const parts=line.split(/[;,]/u).map(part=>part.trim()).filter(Boolean);
+   return !(parts.length>0&&parts.every(part=>offeredContacts(part).length>0));
+  }).join(' '));
   const clauses=recipientText.split(/[,;.!]/u).map(part=>part.trim());
   return clauses.some(clause=>{
    if(/(?:^|\s)не\s+(?:для|пісня)/u.test(clause))return false;
